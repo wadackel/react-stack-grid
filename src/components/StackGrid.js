@@ -17,6 +17,8 @@ import type { Units } from "../types/";
 const imagesLoaded = ExecutionEnvironment.canUseDOM ? require("imagesloaded") : null;
 
 
+const isNumber = (v: any): boolean => typeof v === "number" && isFinite(v);
+
 const createArray = <T>(v: T, l: number): Array<T> => {
   const array = [];
   for (let i = 0; i < l; i++) array.push(v);
@@ -93,10 +95,10 @@ const propTypes = {
   userAgent: PropTypes.string
 };
 
-class GridInline extends Component {
+export class GridInline extends Component {
   props: InlineProps;
   state: InlineState;
-  items: { [key: string]: React$Component<any, any, any>; };
+  items: { [key: string]: GridItem; };
   imgLoad: Object;
   debouncedUpdateLayout: Function;
 
@@ -142,7 +144,9 @@ class GridInline extends Component {
     if (item.key && this.items.hasOwnProperty(item.key)) {
       const component = this.items[item.key];
       const el = ReactDOM.findDOMNode(component);
-      return Math.max(el.scrollHeight, el.clientHeight, el.offsetHeight);
+      const candidate = [el.scrollHeight, el.clientHeight, el.offsetHeight, 0].filter(isNumber);
+
+      return Math.max(...candidate);
     }
 
     return 0;
