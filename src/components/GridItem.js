@@ -198,9 +198,10 @@ export default class GridItem extends Component {
       ...rest
     } = this.props;
 
-    const Element = React.Children.only(rest.children).type;
+    const Element = "span";
     const style = buildStyles({
       ...this.state,
+      display: "block",
       position: "absolute",
       top: 0,
       left: 0,
