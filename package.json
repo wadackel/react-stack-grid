@@ -1,0 +1,92 @@
+{
+  "name": "react-stack-grid",
+  "version": "0.0.1",
+  "description": "Pinterest like layout components for React.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm-run-all watch",
+    "build": "babel src -d lib",
+    "watch": "npm-run-all --parallel watch:build watch:test docs:watch",
+    "watch:build": "npm run build -- -w --skip-initial-build",
+    "watch:test": "npm run test:unit -- -w",
+    "test": "npm-run-all test:*",
+    "test:lint": "eslint src/js/**/*.js test/**/*.js .eslintrc.js --no-ignore",
+    "test:typecheck": "flow; test $? -eq 0 -o $? -eq 2",
+    "test:unit": "NODE_ENV=development mocha test/**/*.spec.js --compilers js:babel-register --recursive --require test/.setup.js",
+    "docs": "browserify -e docs/js/entry.js -o docs/js/bundle.js",
+    "docs:watch": "npm-run-all --parallel docs:watch:*",
+    "docs:watch:js": "watchify -e docs/js/entry.js -o docs/js/bundle.js -d -v & watch '$(npm bin)/browser-sync reload' docs/js/",
+    "docs:watch:server": "browser-sync start -s docs/ -f 'docs/**/*, !docs/js/**/*' --no-open --no-ghost-mode --no-notify",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsuyoshiwada/react-stack-grid.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "layout",
+    "grid",
+    "pinterest",
+    "masonry"
+  ],
+  "author": "tsuyoshiwada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsuyoshiwada/react-stack-grid/issues"
+  },
+  "homepage": "https://github.com/tsuyoshiwada/react-stack-grid#readme",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.17.6",
+    "browserify": "^13.1.1",
+    "enzyme": "^2.6.0",
+    "eslint": "^3.10.2",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-flowtype-errors": "^1.5.0",
+    "eslint-plugin-react": "^6.7.1",
+    "flow-bin": "^0.35.0",
+    "jsdom": "^9.8.3",
+    "mocha": "^3.1.2",
+    "npm-run-all": "^3.1.1",
+    "power-assert": "^1.4.2",
+    "rc-slider": "^5.3.4",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^3.0.0",
+    "react-select": "^1.0.0-rc.2",
+    "watch": "^1.0.1",
+    "watchify": "^3.7.0"
+  },
+  "peerDependencies": {
+    "react": ">=0.15.0",
+    "react-dom": ">=0.15.0"
+  },
+  "dependencies": {
+    "easy-css-transform-builder": "^0.0.2",
+    "exenv": "^1.2.1",
+    "imagesloaded": "^4.1.1",
+    "inline-style-prefixer": "^2.0.4",
+    "invariant": "^2.2.2",
+    "react-addons-transition-group": "^15.3.2",
+    "react-sizeme": "^2.2.0",
+    "shallowequal": "^0.2.2",
+    "throttle-debounce": "^1.0.1"
+  }
+}

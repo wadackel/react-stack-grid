@@ -1,0 +1,36 @@
+declare module "imagesloaded" {
+  declare export default any;
+}
+
+declare module "react-addons-transition-group" {
+  declare export default any;
+}
+
+declare module "inline-style-prefixer" {
+  declare export default any;
+}
+
+declare module "shallowequal" {
+  declare export default any;
+}
+
+declare module "react-sizeme" {
+  declare export default any;
+}
+
+declare module "throttle-debounce" {
+  declare export function debounce(): Function;
+}
+
+declare module "exenv" {
+  declare export default any;
+}
+
+declare module "invariant" {
+  declare export default any;
+}
+
+declare module "easy-css-transform-builder" {
+  declare export function createCSSTransformBuilder(): Function;
+  declare export var properties: Array<string>;
+}
