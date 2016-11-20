@@ -243,3 +243,22 @@ button:focus {
   margin: .2em 0 0;
   font-weight: normal;
 }
+
+
+@media (max-width: 580px) {
+  .header h1 {
+    top: 15px;
+    left: 15px;
+    width: 120px;
+  }
+
+  .header nav {
+    top: 15px;
+    left: 135px;
+  }
+
+  .header li {
+    display: block;
+    margin-left: 1em;
+  }
+}
