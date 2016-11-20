@@ -13,7 +13,7 @@ const isTransformProp = v => properties.indexOf(v) > -1;
 export const transition = (props: Array<string>, duration: number, easing: string) => (
   props.map(prop =>
     `${prop} ${duration}ms ${easing}`
-  )
+  ).join(",")
 );
 
 
