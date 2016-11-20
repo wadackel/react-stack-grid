@@ -11,7 +11,8 @@ const itemModifier = [
   "gray-light",
   "gray-dark",
   "yellow",
-  "pink"
+  "pink",
+  "purple"
 ];
 
 export default class Home extends Component {

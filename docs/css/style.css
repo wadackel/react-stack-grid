@@ -216,6 +216,10 @@ button:focus {
   background: #d59c90;
 }
 
+.item--purple {
+  background: #c9cae3;
+}
+
 .item--pattern1 {
   background: url("../images/pattern1.png") repeat 0 0;
   background-size: 45px;
