@@ -4,7 +4,7 @@
   "description": "Pinterest like layout components for React.js",
   "main": "lib/index.js",
   "scripts": {
-    "start": "npm-run-all watch",
+    "start": "npm run watch",
     "build": "babel src -d lib",
     "watch": "npm-run-all --parallel watch:build watch:test docs:watch",
     "watch:build": "npm run build -- -w --skip-initial-build",

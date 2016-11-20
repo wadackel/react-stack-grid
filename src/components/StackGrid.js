@@ -222,7 +222,8 @@ class GridInline extends Component {
     this.updateLayout(this.props);
 
     if (this.props.monitorImagesLoaded && typeof imagesLoaded === "function") {
-      const imgLoad = imagesLoaded(item);
+      const node = ReactDOM.findDOMNode(item);
+      const imgLoad = imagesLoaded(node);
 
       imgLoad.on("always", () => {
         this.debouncedUpdateLayout(this.props);
