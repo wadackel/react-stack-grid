@@ -26,7 +26,6 @@ const mockProps = {
   entered: transitions.fadeUp.entered,
   leaved: transitions.fadeUp.leaved,
   units: { length: "px", angle: "deg" },
-  monitorImagesLoaded: false,
   vendorPrefix: true,
   userAgent: null,
   onMounted: () => {},
@@ -35,7 +34,7 @@ const mockProps = {
 
 let clock = null;
 
-describe.only("<GridItem />", () => {
+describe("<GridItem />", () => {
 
   before(() => {
     clock = sinon.useFakeTimers();

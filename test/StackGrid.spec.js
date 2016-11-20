@@ -31,13 +31,16 @@ const mockProps = {
 
 describe("<StackGrid /> (GridInline)", () => {
   it("Should be pass the base props", () => {
-    const wrapper = mount(<StackGrid
+    const wrapper = mount(
+      <StackGrid
         className="rsg-grid"
         style={{
           width: 960,
           background: "#fff"
         }}
-      />
+      >
+        <div key="A">A</div>
+      </StackGrid>
     );
 
     assert(wrapper.props().className === "rsg-grid");
@@ -57,7 +60,9 @@ describe("<StackGrid /> (GridInline)", () => {
         {...mockProps}
         className="rsg-grid"
         component="section"
-      />
+      >
+        <div key="A">A</div>
+      </GridInline>
     );
 
     assert(wrapper.find("section.rsg-grid").length === 1);
