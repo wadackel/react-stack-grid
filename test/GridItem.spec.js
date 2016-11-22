@@ -90,7 +90,7 @@ describe("<GridItem />", () => {
 
     assert(spyFunctions.appear.called === true);
 
-    gridItem.componentWillAppear(() => {});
+    gridItem.componentDidAppear(() => {});
     clock.tick(300);
     assert(spyFunctions.appeared.called === true);
 
