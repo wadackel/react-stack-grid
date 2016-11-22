@@ -30,6 +30,15 @@ const mockProps = {
 
 
 describe("<StackGrid /> (GridInline)", () => {
+  it("Should not be render children", () => {
+    const wrapper = mount(
+      <StackGrid />
+    );
+
+    assert(wrapper.children().length === 0);
+  });
+
+
   it("Should be pass the base props", () => {
     const wrapper = mount(
       <StackGrid

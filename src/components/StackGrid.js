@@ -69,7 +69,7 @@ type InlineProps = $All<Props, {
 }>;
 
 const propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
   component: PropTypes.string,
