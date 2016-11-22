@@ -55,26 +55,26 @@ width of parent is managed by [react-sizeme](https://github.com/ctrlplusb/react-
 
 You can set the following properties.
 
-| Property              | Type               | Default                          | Description                                                                                                                             |
-|:----------------------|:-------------------|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| `className`           | `PropTypes.string` | `undefined`                      | Specify `className` of component.                                                                                                       |
-| `style`               | `PropTypes.object` | `{}`                             | Original style of component. Following styles are ignored. (`position`, `height`, `transition`)                                         |
-| `component`           | `PropTypes.string` | `"div"`                          | See [ReactTransitionGroup](https://facebook.github.io/react/docs/animation.html#rendering-a-different-component)                        |
-| `columnWidth`         | `PropTypes.number` | `150`                            | Specify column width as an number(`px`). Specification in `%` is planned in future as well.                                             |
-| `gutterWidth`         | `PropTypes.number` | `5`                              | Specify gutter width as an number.                                                                                                      |
-| `gutterHeight`        | `PropTypes.number` | `5`                              | Specify gutter height as an number.                                                                                                     |
-| `duration`            | `PropTypes.number` | `480`                            | Specify duration of animation in ms.                                                                                                    |
-| `easing`              | `PropTypes.string` | `easings.quartOut`               | Specify a css valid transition-timing-function string. It can be easily specification by using `easings`.                               |
-| `appearDelay`         | `PropTypes.number` | `30`                             | Specify delay of the initial animation in ms.                                                                                           |
-| `appear`              | `PropTypes.func`   | `fadeUp.appear`                  | See Animations section.                                                                                                                 |
-| `appeared`            | `PropTypes.func`   | `fadeUp.appear`                  | ...                                                                                                                                     |
-| `enter`               | `PropTypes.func`   | `fadeUp.appear`                  | ...                                                                                                                                     |
-| `entered`             | `PropTypes.func`   | `fadeUp.appear`                  | ...                                                                                                                                     |
-| `leaved`              | `PropTypes.func`   | `fadeUp.appear`                  | ...                                                                                                                                     |
-| `units`               | `PropTypes.func`   | `{ length: "px", angle: "deg" }` | ...                                                                                                                                     |
-| `monitorImagesLoaded` | `PropTypes.bool`   | `false`                          | If set to `true`, images reading is monitored. use [imagesloaded](https://github.com/desandro/imagesloaded).                            |
-| `vendorPrefix`        | `PropTypes.bool`   | `false`                          | If set to `true`, add a vendor prefix to styles add dynamically.                                                                        |
-| `userAgent`           | `PropTypes.string` | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
+| Property              | Type                                                        | Default                          | Description                                                                                                                             |
+|:----------------------|:------------------------------------------------------------|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| `className`           | `PropTypes.string`                                          | `undefined`                      | Specify `className` of component.                                                                                                       |
+| `style`               | `PropTypes.object`                                          | `{}`                             | Original style of component. Following styles are ignored. (`position`, `height`, `transition`)                                         |
+| `component`           | `PropTypes.string`                                          | `"div"`                          | See [ReactTransitionGroup](https://facebook.github.io/react/docs/animation.html#rendering-a-different-component)                        |
+| `columnWidth`         | `PropTypes.oneOfType([PropTypes.number, PropTypes.string])` | `150`                            | Specify column width as an number(`px`), or percentage string. (Example `"33.33%"`)                                                     |
+| `gutterWidth`         | `PropTypes.number`                                          | `5`                              | Specify gutter width as an number.                                                                                                      |
+| `gutterHeight`        | `PropTypes.number`                                          | `5`                              | Specify gutter height as an number.                                                                                                     |
+| `duration`            | `PropTypes.number`                                          | `480`                            | Specify duration of animation in ms.                                                                                                    |
+| `easing`              | `PropTypes.string`                                          | `easings.quartOut`               | Specify a css valid transition-timing-function string. It can be easily specification by using `easings`.                               |
+| `appearDelay`         | `PropTypes.number`                                          | `30`                             | Specify delay of the initial animation in ms.                                                                                           |
+| `appear`              | `PropTypes.func`                                            | `fadeUp.appear`                  | See Animations section.                                                                                                                 |
+| `appeared`            | `PropTypes.func`                                            | `fadeUp.appear`                  | ...                                                                                                                                     |
+| `enter`               | `PropTypes.func`                                            | `fadeUp.appear`                  | ...                                                                                                                                     |
+| `entered`             | `PropTypes.func`                                            | `fadeUp.appear`                  | ...                                                                                                                                     |
+| `leaved`              | `PropTypes.func`                                            | `fadeUp.appear`                  | ...                                                                                                                                     |
+| `units`               | `PropTypes.func`                                            | `{ length: "px", angle: "deg" }` | ...                                                                                                                                     |
+| `monitorImagesLoaded` | `PropTypes.bool`                                            | `false`                          | If set to `true`, images reading is monitored. use [imagesloaded](https://github.com/desandro/imagesloaded).                            |
+| `vendorPrefix`        | `PropTypes.bool`                                            | `false`                          | If set to `true`, add a vendor prefix to styles add dynamically.                                                                        |
+| `userAgent`           | `PropTypes.string`                                          | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
 
 
 
@@ -167,7 +167,7 @@ If it's not necessary, specify `0` for `duration` property.
 
 ## TODO
 
-* [ ] Support `%` columnWidth.
+* [x] Support `%` columnWidth.
 
 
 ## Thanks
