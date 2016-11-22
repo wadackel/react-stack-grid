@@ -18,6 +18,7 @@ const imagesLoaded = ExecutionEnvironment.canUseDOM ? require("imagesloaded") : 
 
 
 const isNumber = (v: any): boolean => typeof v === "number" && isFinite(v);
+const isPercentageNumber = (v: any): boolean => typeof v === "string" && /^\d+(\.\d+)?%$/.test(v);
 
 const createArray = <T>(v: T, l: number): Array<T> => {
   const array = [];
@@ -68,7 +69,7 @@ type InlineProps = $All<Props, {
 }>;
 
 const propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
   component: PropTypes.string,
@@ -136,10 +137,6 @@ export class GridInline extends Component {
     );
   }
 
-  getMaxColumn(width: number, columnWidth: number, gutterWidth: number): number {
-    return Math.floor((width - (width / columnWidth - 1) * gutterWidth) / columnWidth);
-  }
-
   getItemHeight(item: any): number {
     if (item.key && this.items.hasOwnProperty(item.key)) {
       const component = this.items[item.key];
@@ -152,21 +149,30 @@ export class GridInline extends Component {
     return 0;
   }
 
-  normalizeColumnWidth(width: number, value: number | string, gutterWidth: number): number {
-    if (typeof value === "number" && isFinite(value)) {
-      return value;
+  getColumnLengthAndWidth(width: number, value: number | string, gutter: number): [number, number] {
+    if (isNumber(value)) {
+      const columnWidth = parseFloat(value, 10);
 
-    } else if (typeof value === "string" && /.+%/.test(value)) {
-      return width * (parseFloat(value, 10) / 100) - gutterWidth;
+      return [
+        Math.floor((width - (width / columnWidth - 1) * gutter) / columnWidth),
+        columnWidth
+      ];
+
+    } else if (isPercentageNumber(value)) {
+      const columnWidth = width * (parseFloat(value, 10) / 100);
+      const maxColumn = Math.floor(width / columnWidth);
+
+      return [
+        maxColumn,
+        columnWidth - (gutter * (maxColumn - 1))
+      ];
     }
 
-    invariant(true, "Should be columnWidth is a number or percentage string.");
-
-    return 0;
+    invariant(false, "Should be columnWidth is a number or percentage string.");
   }
 
   doLayout(props: InlineProps): InlineState {
-    return ExecutionEnvironment.canUseDOM
+    return ExecutionEnvironment.canUseDOM && props.size.width !== 0
       ? this.doLayoutForClient(props)
       : this.doLayoutForSSR(props);
   }
@@ -180,8 +186,7 @@ export class GridInline extends Component {
     } = props;
 
     const childArray = React.Children.toArray(props.children);
-    const columnWidth = this.normalizeColumnWidth(containerWidth, rawColumnWidth, gutterWidth);
-    const maxColumn = this.getMaxColumn(containerWidth, columnWidth, gutterWidth);
+    const [maxColumn, columnWidth] = this.getColumnLengthAndWidth(containerWidth, rawColumnWidth, gutterWidth);
     const columnHeights = createArray(0, maxColumn);
 
     const rects = childArray.map(child => {

@@ -36,6 +36,7 @@ export default class GridItem extends Component {
   state: State;
   node: ?HTMLElement;
   _isMounted: boolean;
+  appearTimer: ?number;
 
   static propTypes = {
     itemKey: PropTypes.string,
@@ -73,6 +74,7 @@ export default class GridItem extends Component {
     super(props);
 
     this._isMounted = false;
+    this.appearTimer = null;
     this.node = null;
 
     this.state = {
@@ -88,6 +90,8 @@ export default class GridItem extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+    clearTimeout(this.appearTimer);
+    this.appearTimer = null;
     this.props.onUnmount(this);
   }
 
@@ -108,10 +112,11 @@ export default class GridItem extends Component {
   }
 
   componentWillAppear(callback: Function) {
-    setTimeout(() => {
-      this.setAppearedStyles();
-      callback();
-    }, this.props.appearDelay * this.props.index);
+    this.appearTimer = setTimeout(callback, this.props.appearDelay * this.props.index);
+  }
+
+  componentDidAppear() {
+    this.setAppearedStyles();
   }
 
   componentWillEnter(callback: Function) {
