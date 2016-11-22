@@ -172,7 +172,7 @@ export class GridInline extends Component {
   }
 
   doLayout(props: InlineProps): InlineState {
-    return ExecutionEnvironment.canUseDOM
+    return ExecutionEnvironment.canUseDOM && props.size.width !== 0
       ? this.doLayoutForClient(props)
       : this.doLayoutForSSR(props);
   }
