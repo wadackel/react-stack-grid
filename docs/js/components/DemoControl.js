@@ -15,6 +15,10 @@ const selectTransitionOptions = Object.keys(transitions).map(k => ({
 
 
 export default class DemoControl extends Component {
+  handleShuffle = () => {
+    this.props.onShuffle();
+  }
+
   handlePrepend = () => {
     this.props.onPrepend();
   }
@@ -58,6 +62,12 @@ export default class DemoControl extends Component {
 
     return (
       <div className="demo-control">
+        <div>
+          <button className="btn" onClick={this.handleShuffle}>Shuffle</button>
+        </div>
+
+        <div />
+
         <div>
           <button className="btn" onClick={this.handlePrepend}>Prepend</button>
         </div>

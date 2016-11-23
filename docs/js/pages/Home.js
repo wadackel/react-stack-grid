@@ -43,6 +43,20 @@ export default class Home extends Component {
     return { id, height, modifier };
   }
 
+  shuffleItems = () => {
+    const newItems = [...this.state.items];
+    let i = newItems.length;
+
+    while (i) {
+      const j = Math.floor(Math.random() * i);
+      const t = newItems[--i];
+      newItems[i] = newItems[j];
+      newItems[j] = t;
+    }
+
+    this.setState({ items: newItems });
+  }
+
   prependItem = () => {
     this.setState({
       items: [this.createItem(), ...this.state.items]
@@ -113,6 +127,7 @@ export default class Home extends Component {
           gutter={gutter}
           easing={easing}
           transition={transition}
+          onShuffle={this.shuffleItems}
           onPrepend={this.prependItem}
           onAppend={this.appendItem}
           onMultipleAppend={this.multipleAppendItem}
