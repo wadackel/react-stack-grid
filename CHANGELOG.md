@@ -1,3 +1,10 @@
+## 0.1.1
+
+* Fix transition animation when sort order changed
+* Update demo page (Added shuffle button)
+
+
+
 ## 0.1.0
 
 ### New feature
