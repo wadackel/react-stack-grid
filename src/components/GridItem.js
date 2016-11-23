@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from "react";
 import shallowequal from "shallowequal";
 import { transition, buildStyles } from "../utils/style-helper";
+import { raf } from "../animations/request-animation-frame";
 
 import type { Units, Rect } from "../types/";
 
@@ -97,9 +98,11 @@ export default class GridItem extends Component {
 
   componentWillReceiveProps(nextProps: Props) {
     if (!shallowequal(nextProps, this.props)) {
-      this.setState({
-        ...this.state,
-        ...this.getPositionStyles(nextProps.rect, 2)
+      raf(() => {
+        this.setState({
+          ...this.state,
+          ...this.getPositionStyles(nextProps.rect, 2)
+        });
       });
     }
   }
