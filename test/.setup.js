@@ -16,3 +16,9 @@ Object.keys(document.defaultView).forEach(property => {
 global.navigator = {
   userAgent: "node.js"
 };
+
+global.window.requestAnimationFrame = callback => {
+  return setTimeout(callback, 1);
+};
+
+global.window.cancelAnimationFrame = () => {};
