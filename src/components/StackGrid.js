@@ -120,7 +120,7 @@ export class GridInline extends Component {
     this.state = this.doLayout(props);
   }
 
-  coponentDidMount() {
+  componentDidMount() {
     this.updateLayout(this.props);
   }
 
