@@ -75,6 +75,7 @@ You can set the following properties.
 | `monitorImagesLoaded` | `PropTypes.bool`                                            | `false`                          | If set to `true`, images reading is monitored. use [imagesloaded](https://github.com/desandro/imagesloaded).                            |
 | `vendorPrefix`        | `PropTypes.bool`                                            | `false`                          | If set to `true`, add a vendor prefix to styles add dynamically.                                                                        |
 | `userAgent`           | `PropTypes.string`                                          | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
+| `enableSSR`           | `PropTypes.bool`                                          | `false`                      | Render component on the server side. [More info](https://github.com/ctrlplusb/react-sizeme#server-side-rendering). |
 
 
 

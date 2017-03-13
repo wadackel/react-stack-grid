@@ -47,6 +47,7 @@ type Props = {
   monitorImagesLoaded: boolean;
   vendorPrefix: boolean;
   userAgent: ?string;
+  enableSSR: boolean;
 };
 
 type InlineState = {
@@ -93,7 +94,8 @@ const propTypes = {
   }),
   monitorImagesLoaded: PropTypes.bool,
   vendorPrefix: PropTypes.bool,
-  userAgent: PropTypes.string
+  userAgent: PropTypes.string,
+  enableSSR: PropTypes.bool
 };
 
 export class GridInline extends Component {
@@ -268,6 +270,7 @@ export class GridInline extends Component {
       size,
       component,
       children,
+      enableSSR,
       ...rest
     } = this.props;
 
@@ -342,10 +345,12 @@ export default class StackGrid extends Component {
     units: { length: "px", angle: "deg" },
     monitorImagesLoaded: false,
     vendorPrefix: true,
-    userAgent: null
+    userAgent: null,
+    enableSSR: false
   };
 
   render() {
+    sizeMe.enableSSRBehaviour = this.props.enableSSR;
     return <SizeAwareGridInline {...this.props} />;
   }
 }
