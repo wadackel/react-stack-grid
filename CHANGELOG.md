@@ -1,3 +1,9 @@
+## 0.2.0
+
+* Add `enableSSR` props. Thanks for [@egorAva](https://github.com/egorAva)! [#7](https://github.com/tsuyoshiwada/react-stack-grid/pull/7)
+
+
+
 ## 0.1.1
 
 * Fix transition animation when sort order changed
