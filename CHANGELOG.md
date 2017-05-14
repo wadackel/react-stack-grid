@@ -1,3 +1,12 @@
+## 0.2.1
+
+
+* Support for React v15.5.x ~ (add `prop-types` package) [#2](https://github.com/tsuyoshiwada/react-stack-grid/issues/12)
+* Fix lint and typechecking (flowtype)
+* Update devDependencies
+
+
+
 ## 0.2.0
 
 * Add `enableSSR` props. Thanks for [@egorAva](https://github.com/egorAva)! [#7](https://github.com/tsuyoshiwada/react-stack-grid/pull/7)
