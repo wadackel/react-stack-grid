@@ -1,6 +1,7 @@
 // @flow
-import React, { Component, PropTypes, isValidElement } from "react";
+import React, { Component, isValidElement } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import TransitionGroup from "react-addons-transition-group";
 import sizeMe from "react-sizeme";
 import shallowequal from "shallowequal";

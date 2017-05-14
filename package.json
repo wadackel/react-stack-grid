@@ -88,6 +88,7 @@
     "imagesloaded": "^4.1.1",
     "inline-style-prefixer": "^2.0.4",
     "invariant": "^2.2.2",
+    "prop-types": "^15.5.10",
     "react-addons-transition-group": "^15.3.2",
     "react-sizeme": "^2.2.0",
     "shallowequal": "^0.2.2",

@@ -1,3 +1,7 @@
+declare module "prop-types" {
+  declare export default any;
+}
+
 declare module "imagesloaded" {
   declare export default any;
 }
