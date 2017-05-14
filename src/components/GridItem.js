@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import shallowequal from "shallowequal";
 import { transition, buildStyles } from "../utils/style-helper";
 import { raf } from "../animations/request-animation-frame";

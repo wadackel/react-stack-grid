@@ -20,7 +20,11 @@ module.exports = {
     "flowtype",
     "flowtype-errors"
   ],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
   "rules": {
     // Possible Errors
     "comma-dangle": "error",
