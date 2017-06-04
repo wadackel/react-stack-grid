@@ -6,7 +6,7 @@ declare module "imagesloaded" {
   declare export default any;
 }
 
-declare module "react-addons-transition-group" {
+declare module "react-transition-group/TransitionGroup" {
   declare export default any;
 }
 
@@ -35,6 +35,6 @@ declare module "invariant" {
 }
 
 declare module "easy-css-transform-builder" {
-  declare export function createCSSTransformBuilder(): Function;
+  declare export function createCSSTransformBuilder(units: any): Function;
   declare export var properties: Array<string>;
 }
