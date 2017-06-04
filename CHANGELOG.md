@@ -1,5 +1,13 @@
-## 0.2.1
+## 0.2.2
 
+* Fix calculations for percentage columns width [#16](https://github.com/tsuyoshiwada/react-stack-grid/pull/16)  
+  Thanks [@mquandalle](https://github.com/mquandalle)!
+* Migrate from react-addons-transition-group to react-transition-group. [#17](https://github.com/tsuyoshiwada/react-stack-grid/issues/17)
+* Remove setState warning that occurs after unmounting.
+
+
+
+## 0.2.1
 
 * Support for React v15.5.x ~ (add `prop-types` package) [#2](https://github.com/tsuyoshiwada/react-stack-grid/issues/12)
 * Fix lint and typechecking (flowtype)
