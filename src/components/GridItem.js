@@ -207,7 +207,6 @@ export default class GridItem extends Component {
       ...rest
     } = this.props;
 
-    const Element = "span";
     const style = buildStyles({
       ...this.state,
       display: "block",
@@ -219,7 +218,7 @@ export default class GridItem extends Component {
     }, units, vendorPrefix, userAgent);
 
     /* eslint-disable no-return-assign */
-    return <Element
+    return <span
       {...rest}
       ref={node => this.node = node}
       style={style}
