@@ -1,5 +1,4 @@
-react-stack-grid
-================
+# react-stack-grid
 
 [![Build Status](http://img.shields.io/travis/tsuyoshiwada/react-stack-grid.svg?style=flat-square)](https://travis-ci.org/tsuyoshiwada/react-stack-grid)
 [![npm version](https://img.shields.io/npm/v/react-stack-grid.svg?style=flat-square)](http://badge.fury.io/js/react-stack-grid)
@@ -75,7 +74,7 @@ You can set the following properties.
 | `monitorImagesLoaded` | `PropTypes.bool`                                            | `false`                          | If set to `true`, images reading is monitored. use [imagesloaded](https://github.com/desandro/imagesloaded).                            |
 | `vendorPrefix`        | `PropTypes.bool`                                            | `false`                          | If set to `true`, add a vendor prefix to styles add dynamically.                                                                        |
 | `userAgent`           | `PropTypes.string`                                          | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
-| `enableSSR`           | `PropTypes.bool`                                          | `false`                      | Render component on the server side. [More info](https://github.com/ctrlplusb/react-sizeme#server-side-rendering). |
+| `enableSSR`           | `PropTypes.bool`                                            | `false`                          | Render component on the server side. [More info](https://github.com/ctrlplusb/react-sizeme#server-side-rendering).                      |
 
 
 
@@ -166,15 +165,11 @@ If it's not necessary, specify `0` for `duration` property.
 
 
 
-## TODO
-
-* [x] Support `%` columnWidth.
-
-
 ## Thanks
 
 * Layout inspired by [Pinterest](https://pinterest.com/).
 * API inspired by [dantrain/react-stonecutter](https://github.com/dantrain/react-stonecutter).
+
 
 
 ## License
