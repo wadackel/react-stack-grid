@@ -2,7 +2,7 @@
 import React, { Component, isValidElement } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import TransitionGroup from "react-addons-transition-group";
+import TransitionGroup from "react-transition-group/TransitionGroup";
 import sizeMe from "react-sizeme";
 import shallowequal from "shallowequal";
 import { debounce } from "throttle-debounce";
