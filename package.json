@@ -8,7 +8,6 @@
     "build": "npm-run-all build:*",
     "build:clean": "rimraf lib",
     "build:js": "babel src -d lib",
-    "build:flow-gen": "flow gen-flow-files src/index.js --out-dir lib",
     "watch": "npm-run-all --parallel watch:build watch:test docs:watch",
     "watch:build": "npm run build:js -- -w --skip-initial-build",
     "watch:test": "npm run test:unit -- -w",
