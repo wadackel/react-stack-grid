@@ -162,12 +162,13 @@ export class GridInline extends Component {
       ];
 
     } else if (isPercentageNumber(value)) {
-      const columnWidth = width * (parseFloat(value, 10) / 100);
-      const maxColumn = Math.floor(width / columnWidth);
+      const columnPercentage = parseFloat(value, 10) / 100;
+      const maxColumn = Math.floor(1 / columnPercentage);
+      const columnWidth = (width - gutter * (maxColumn - 1)) / maxColumn;
 
       return [
         maxColumn,
-        columnWidth - (gutter * (maxColumn - 1))
+        columnWidth
       ];
     }
 
