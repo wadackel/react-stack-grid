@@ -37,7 +37,7 @@ export default class GridItem extends Component {
   props: Props;
   state: State;
   node: ?HTMLElement;
-  _isMounted: boolean;
+  mounted: boolean;
   appearTimer: ?number;
 
   static propTypes = {
@@ -75,7 +75,7 @@ export default class GridItem extends Component {
   constructor(props: Props) {
     super(props);
 
-    this._isMounted = false;
+    this.mounted = false;
     this.appearTimer = null;
     this.node = null;
 
@@ -86,12 +86,12 @@ export default class GridItem extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this.mounted = true;
     this.props.onMounted(this);
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.mounted = false;
     clearTimeout(this.appearTimer);
     this.appearTimer = null;
     this.props.onUnmount(this);
@@ -100,7 +100,7 @@ export default class GridItem extends Component {
   componentWillReceiveProps(nextProps: Props) {
     if (!shallowequal(nextProps, this.props)) {
       raf(() => {
-        this.setState({
+        this.setStateIfNeeded({
           ...this.state,
           ...this.getPositionStyles(nextProps.rect, 2)
         });
@@ -137,6 +137,12 @@ export default class GridItem extends Component {
     setTimeout(callback, this.props.duration);
   }
 
+  setStateIfNeeded(state: Object) {
+    if (this.mounted) {
+      this.setState(state);
+    }
+  }
+
   getTransitionStyles(type: string, props: Props): Object {
     const { rect, containerSize, index } = props;
 
@@ -152,7 +158,7 @@ export default class GridItem extends Component {
   }
 
   setAppearedStyles() {
-    this.setState({
+    this.setStateIfNeeded({
       ...this.state,
       ...this.getTransitionStyles("appeared", this.props),
       ...this.getPositionStyles(this.props.rect, 1)
@@ -160,7 +166,7 @@ export default class GridItem extends Component {
   }
 
   setEnterStyles() {
-    this.setState({
+    this.setStateIfNeeded({
       ...this.state,
       ...this.getPositionStyles(this.props.rect, 2),
       ...this.getTransitionStyles("enter", this.props)
@@ -168,7 +174,7 @@ export default class GridItem extends Component {
   }
 
   setEnteredStyles() {
-    this.setState({
+    this.setStateIfNeeded({
       ...this.state,
       ...this.getTransitionStyles("entered", this.props),
       ...this.getPositionStyles(this.props.rect, 1)
@@ -176,7 +182,7 @@ export default class GridItem extends Component {
   }
 
   setLeaveStyles() {
-    this.setState({
+    this.setStateIfNeeded({
       ...this.state,
       ...this.getPositionStyles(this.props.rect, 2),
       ...this.getTransitionStyles("leaved", this.props)

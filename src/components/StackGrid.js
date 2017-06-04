@@ -105,6 +105,7 @@ export class GridInline extends Component {
   items: { [key: string]: GridItem; };
   imgLoad: Object;
   debouncedUpdateLayout: Function;
+  mounted: boolean;
 
   static propTypes = {
     ...propTypes,
@@ -119,11 +120,12 @@ export class GridInline extends Component {
 
     this.items = {};
     this.imgLoad = {};
-    this.debouncedUpdateLayout = debounce(20, this.updateLayout);
+    this.mounted = false;
     this.state = this.doLayout(props);
   }
 
   componentDidMount() {
+    this.mounted = true;
     this.updateLayout(this.props);
   }
 
@@ -138,6 +140,16 @@ export class GridInline extends Component {
       !shallowequal(nextProps, this.props) ||
       !shallowequal(nextState, this.state)
     );
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  setStateIfNeeded(state: Object) {
+    if (this.mounted) {
+      this.setState(state);
+    }
   }
 
   getItemHeight(item: any): number {
@@ -226,7 +238,7 @@ export class GridInline extends Component {
   }
 
   updateLayout(props: InlineProps): void {
-    this.setState(this.doLayout(props));
+    this.setStateIfNeeded(this.doLayout(props));
   }
 
   handleItemMounted = (item: GridItem) => {
