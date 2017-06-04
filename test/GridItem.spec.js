@@ -1,9 +1,9 @@
-import assert from "power-assert";
-import sinon from "sinon";
-import React from "react";
-import { mount } from "enzyme";
-import { easings, transitions } from "../src/";
-import GridItem from "../src/components/GridItem";
+import assert from 'power-assert';
+import sinon from 'sinon';
+import React from 'react';
+import { mount } from 'enzyme';
+import { easings, transitions } from '../src/';
+import GridItem from '../src/components/GridItem';
 
 
 const mockProps = {
@@ -11,11 +11,11 @@ const mockProps = {
     top: 0,
     left: 0,
     width: 0,
-    height: 0
+    height: 0,
   },
   containerSize: {
     width: 960,
-    height: 0
+    height: 0,
   },
   index: 0,
   easing: easings.quartOut,
@@ -25,17 +25,16 @@ const mockProps = {
   enter: transitions.fadeUp.enter,
   entered: transitions.fadeUp.entered,
   leaved: transitions.fadeUp.leaved,
-  units: { length: "px", angle: "deg" },
+  units: { length: 'px', angle: 'deg' },
   vendorPrefix: true,
   userAgent: null,
   onMounted: () => {},
-  onUnmount: () => {}
+  onUnmount: () => {},
 };
 
 let clock = null;
 
-describe("<GridItem />", () => {
-
+describe('<GridItem />', () => {
   before(() => {
     clock = sinon.useFakeTimers();
   });
@@ -45,7 +44,7 @@ describe("<GridItem />", () => {
   });
 
 
-  it("Should be call handleMounted/handleUnmount", () => {
+  it('Should be call handleMounted/handleUnmount', () => {
     const handleMounted = sinon.spy();
     const handleUnmount = sinon.spy();
 
@@ -66,13 +65,13 @@ describe("<GridItem />", () => {
   });
 
 
-  it("Should be call transition style function", () => {
+  it('Should be call transition style function', () => {
     const spyFunctions = {
       appear: sinon.spy(),
       appeared: sinon.spy(),
       enter: sinon.spy(),
       entered: sinon.spy(),
-      leaved: sinon.spy()
+      leaved: sinon.spy(),
     };
 
     const wrapper = mount(

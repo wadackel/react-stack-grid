@@ -1,16 +1,16 @@
-import React from "react";
-import assert from "power-assert";
-import { mount } from "enzyme";
-import StackGrid, { easings, transitions } from "../src/";
-import { GridInline } from "../src/components/StackGrid";
+import React from 'react';
+import assert from 'power-assert';
+import { mount } from 'enzyme';
+import StackGrid, { easings, transitions } from '../src/';
+import { GridInline } from '../src/components/StackGrid';
 
 const mockProps = {
   size: {
     width: 960,
-    height: 0
+    height: 0,
   },
   style: {},
-  component: "div",
+  component: 'div',
   columnWidth: 150,
   gutterWidth: 5,
   gutterHeight: 5,
@@ -22,15 +22,15 @@ const mockProps = {
   enter: transitions.fadeUp.enter,
   entered: transitions.fadeUp.entered,
   leaved: transitions.fadeUp.leaved,
-  units: { length: "px", angle: "deg" },
+  units: { length: 'px', angle: 'deg' },
   monitorImagesLoaded: false,
   vendorPrefix: true,
-  userAgent: null
+  userAgent: null,
 };
 
 
-describe("<StackGrid /> (GridInline)", () => {
-  it("Should not be render children", () => {
+describe('<StackGrid /> (GridInline)', () => {
+  it('Should not be render children', () => {
     const wrapper = mount(
       <StackGrid />
     );
@@ -39,31 +39,31 @@ describe("<StackGrid /> (GridInline)", () => {
   });
 
 
-  it("Should be pass the base props", () => {
+  it('Should be pass the base props', () => {
     const wrapper = mount(
       <StackGrid
         className="rsg-grid"
         style={{
           width: 960,
-          background: "#fff"
+          background: '#fff',
         }}
       >
         <div key="A">A</div>
       </StackGrid>
     );
 
-    assert(wrapper.props().className === "rsg-grid");
+    assert(wrapper.props().className === 'rsg-grid');
     assert.deepStrictEqual(
       wrapper.props().style,
       {
         width: 960,
-        background: "#fff"
+        background: '#fff',
       }
     );
   });
 
 
-  it("Should be render with specify component", () => {
+  it('Should be render with specify component', () => {
     const wrapper = mount(
       <GridInline
         {...mockProps}
@@ -74,11 +74,11 @@ describe("<StackGrid /> (GridInline)", () => {
       </GridInline>
     );
 
-    assert(wrapper.find("section.rsg-grid").length === 1);
+    assert(wrapper.find('section.rsg-grid').length === 1);
   });
 
 
-  it("Should be render children", () => {
+  it('Should be render children', () => {
     const wrapper = mount(
       <GridInline {...mockProps}>
         <div className="item" key="1">ITEM 1</div>
@@ -87,6 +87,6 @@ describe("<StackGrid /> (GridInline)", () => {
       </GridInline>
     );
 
-    assert(wrapper.find("div.item").length === 3);
+    assert(wrapper.find('div.item').length === 3);
   });
 });

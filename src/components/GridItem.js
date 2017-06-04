@@ -1,11 +1,11 @@
 // @flow
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import shallowequal from "shallowequal";
-import { transition, buildStyles } from "../utils/style-helper";
-import { raf } from "../animations/request-animation-frame";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import shallowequal from 'shallowequal';
+import { transition, buildStyles } from '../utils/style-helper';
+import { raf } from '../animations/request-animation-frame';
 
-import type { Units, Rect } from "../types/";
+import type { Units, Rect } from '../types/';
 
 type Props = {
   itemKey: string;
@@ -33,6 +33,19 @@ type Props = {
 
 type State = Object;
 
+const getTransitionStyles = (type: string, props: Props): Object => {
+  const { rect, containerSize, index } = props;
+
+  return props[type](rect, containerSize, index);
+};
+
+const getPositionStyles = (rect: Rect, zIndex: number): Object => ({
+  translateX: `${rect.left}px`,
+  translateY: `${rect.top}px`,
+  zIndex,
+});
+
+
 export default class GridItem extends Component {
   props: Props;
   state: State;
@@ -47,12 +60,12 @@ export default class GridItem extends Component {
       top: PropTypes.number,
       left: PropTypes.number,
       width: PropTypes.number,
-      height: PropTypes.number
+      height: PropTypes.number,
     }),
     containerSize: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number,
-      actualWidth: PropTypes.number
+      actualWidth: PropTypes.number,
     }),
     duration: PropTypes.number,
     easing: PropTypes.string,
@@ -64,12 +77,12 @@ export default class GridItem extends Component {
     leaved: PropTypes.func,
     units: PropTypes.shape({
       length: PropTypes.string,
-      angle: PropTypes.string
+      angle: PropTypes.string,
     }),
     vendorPrefix: PropTypes.bool,
     userAgent: PropTypes.string,
     onMounted: PropTypes.func,
-    onUnmount: PropTypes.func
+    onUnmount: PropTypes.func,
   };
 
   constructor(props: Props) {
@@ -80,8 +93,8 @@ export default class GridItem extends Component {
     this.node = null;
 
     this.state = {
-      ...this.getPositionStyles(props.rect, 1),
-      ...this.getTransitionStyles("appear", props)
+      ...getPositionStyles(props.rect, 1),
+      ...getTransitionStyles('appear', props),
     };
   }
 
@@ -102,7 +115,7 @@ export default class GridItem extends Component {
       raf(() => {
         this.setStateIfNeeded({
           ...this.state,
-          ...this.getPositionStyles(nextProps.rect, 2)
+          ...getPositionStyles(nextProps.rect, 2),
         });
       });
     }
@@ -143,49 +156,35 @@ export default class GridItem extends Component {
     }
   }
 
-  getTransitionStyles(type: string, props: Props): Object {
-    const { rect, containerSize, index } = props;
-
-    return props[type](rect, containerSize, index);
-  }
-
-  getPositionStyles(rect: Rect, zIndex: number): Object {
-    return {
-      translateX: `${rect.left}px`,
-      translateY: `${rect.top}px`,
-      zIndex
-    };
-  }
-
   setAppearedStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...this.getTransitionStyles("appeared", this.props),
-      ...this.getPositionStyles(this.props.rect, 1)
+      ...getTransitionStyles('appeared', this.props),
+      ...getPositionStyles(this.props.rect, 1),
     });
   }
 
   setEnterStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...this.getPositionStyles(this.props.rect, 2),
-      ...this.getTransitionStyles("enter", this.props)
+      ...getPositionStyles(this.props.rect, 2),
+      ...getTransitionStyles('enter', this.props),
     });
   }
 
   setEnteredStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...this.getTransitionStyles("entered", this.props),
-      ...this.getPositionStyles(this.props.rect, 1)
+      ...getTransitionStyles('entered', this.props),
+      ...getPositionStyles(this.props.rect, 1),
     });
   }
 
   setLeaveStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...this.getPositionStyles(this.props.rect, 2),
-      ...this.getTransitionStyles("leaved", this.props)
+      ...getPositionStyles(this.props.rect, 2),
+      ...getTransitionStyles('leaved', this.props),
     });
   }
 
@@ -215,20 +214,22 @@ export default class GridItem extends Component {
 
     const style = buildStyles({
       ...this.state,
-      display: "block",
-      position: "absolute",
+      display: 'block',
+      position: 'absolute',
       top: 0,
       left: 0,
       width: rect.width,
-      transition: transition(["opacity", "transform"], duration, easing)
+      transition: transition(['opacity', 'transform'], duration, easing),
     }, units, vendorPrefix, userAgent);
 
     /* eslint-disable no-return-assign */
-    return <span
-      {...rest}
-      ref={node => this.node = node}
-      style={style}
-    />;
+    return (
+      <span
+        {...rest}
+        ref={node => this.node = node}
+        style={style}
+      />
+    );
     /* eslint-enable no-return-assign */
   }
 }
