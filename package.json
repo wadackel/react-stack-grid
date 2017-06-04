@@ -90,7 +90,6 @@
     "invariant": "^2.2.2",
     "prop-types": "^15.5.10",
     "react-sizeme": "^2.2.0",
-    "throttle-debounce": "^1.0.1"
     "react-transition-group": "^1.1.3",
     "shallowequal": "^0.2.2"
   }

@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import sizeMe from "react-sizeme";
 import shallowequal from "shallowequal";
-import { debounce } from "throttle-debounce";
 import ExecutionEnvironment from "exenv";
 import invariant from "invariant";
 import GridItem from "./GridItem";
 import { transition } from "../utils/style-helper";
+import { raf } from "../animations/request-animation-frame";
 import * as easings from "../animations/easings";
 import * as transitions from "../animations/transitions/";
 
@@ -104,7 +104,6 @@ export class GridInline extends Component {
   state: InlineState;
   items: { [key: string]: GridItem; };
   imgLoad: Object;
-  debouncedUpdateLayout: Function;
   mounted: boolean;
 
   static propTypes = {
@@ -188,7 +187,7 @@ export class GridInline extends Component {
   }
 
   doLayout(props: InlineProps): InlineState {
-    return ExecutionEnvironment.canUseDOM && props.size.width !== 0
+    return ExecutionEnvironment.canUseDOM
       ? this.doLayoutForClient(props)
       : this.doLayoutForSSR(props);
   }
@@ -244,18 +243,19 @@ export class GridInline extends Component {
   handleItemMounted = (item: GridItem) => {
     const { itemKey: key } = item.props;
     this.items[key] = item;
-    this.updateLayout(this.props);
 
     if (this.props.monitorImagesLoaded && typeof imagesLoaded === "function") {
       const node = ReactDOM.findDOMNode(item);
       const imgLoad = imagesLoaded(node);
 
-      imgLoad.on("always", () => {
-        this.debouncedUpdateLayout(this.props);
-      });
+      imgLoad.once("always", () => raf(() => {
+        this.updateLayout(this.props);
+      }));
 
       this.imgLoad[key] = imgLoad;
     }
+
+    this.updateLayout(this.props);
   }
 
   handleItemUnmount = (item: GridItem) => {
@@ -305,7 +305,7 @@ export class GridInline extends Component {
         component={component}
         className={className}
         style={{
-          ...style,
+          ...(style || {}),
           position: "relative",
           transition: transition(["height"], rest.duration, easings.easeOut),
           height
