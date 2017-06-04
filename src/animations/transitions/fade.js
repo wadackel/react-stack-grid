@@ -1,3 +1,4 @@
+// @flow
 export const appear = () => ({ opacity: 0 });
 
 export const appeared = () => ({ opacity: 1 });

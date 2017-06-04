@@ -1,3 +1,4 @@
+// @flow
 export * as fade from "./fade";
 export * as fadeDown from "./fade-down";
 export * as fadeUp from "./fade-up";

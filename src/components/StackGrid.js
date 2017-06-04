@@ -165,7 +165,7 @@ export class GridInline extends Component {
 
   getColumnLengthAndWidth(width: number, value: number | string, gutter: number): [number, number] {
     if (isNumber(value)) {
-      const columnWidth = parseFloat(value, 10);
+      const columnWidth = parseFloat(value);
 
       return [
         Math.floor((width - (width / columnWidth - 1) * gutter) / columnWidth),
@@ -173,7 +173,7 @@ export class GridInline extends Component {
       ];
 
     } else if (isPercentageNumber(value)) {
-      const columnPercentage = parseFloat(value, 10) / 100;
+      const columnPercentage = parseFloat(value) / 100;
       const maxColumn = Math.floor(1 / columnPercentage);
       const columnWidth = (width - gutter * (maxColumn - 1)) / maxColumn;
 

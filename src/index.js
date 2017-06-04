@@ -1,3 +1,4 @@
+// @flow
 import StackGrid from "./components/StackGrid";
 
 export * as easings from "./animations/easings";

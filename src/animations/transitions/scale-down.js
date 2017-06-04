@@ -1,3 +1,4 @@
+// @flow
 export const appear = () => ({
   scale: 1.1,
   opacity: 0

@@ -8,3 +8,4 @@
 
 [options]
 esproposal.class_static_fields=enable
+esproposal.export_star_as=enable
