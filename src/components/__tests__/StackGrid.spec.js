@@ -1,8 +1,8 @@
 import React from 'react';
-import assert from 'power-assert';
 import { mount } from 'enzyme';
-import StackGrid, { easings, transitions } from '../src/';
-import { GridInline } from '../src/components/StackGrid';
+import StackGrid, { easings, transitions } from '../../';
+import { GridInline } from '../StackGrid';
+
 
 const mockProps = {
   size: {
@@ -35,7 +35,7 @@ describe('<StackGrid /> (GridInline)', () => {
       <StackGrid />
     );
 
-    assert(wrapper.children().length === 0);
+    expect(wrapper.children().length).toBe(0);
   });
 
 
@@ -52,14 +52,11 @@ describe('<StackGrid /> (GridInline)', () => {
       </StackGrid>
     );
 
-    assert(wrapper.props().className === 'rsg-grid');
-    assert.deepStrictEqual(
-      wrapper.props().style,
-      {
-        width: 960,
-        background: '#fff',
-      }
-    );
+    expect(wrapper.props().className).toBe('rsg-grid');
+    expect(wrapper.props().style).toEqual({
+      width: 960,
+      background: '#fff',
+    });
   });
 
 
@@ -74,7 +71,7 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    assert(wrapper.find('section.rsg-grid').length === 1);
+    expect(wrapper.find('section.rsg-grid').length).toBe(1);
   });
 
 
@@ -87,6 +84,6 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    assert(wrapper.find('div.item').length === 3);
+    expect(wrapper.find('div.item').length).toBe(3);
   });
 });

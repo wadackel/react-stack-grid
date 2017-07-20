@@ -1,9 +1,8 @@
-import assert from 'power-assert';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
-import { easings, transitions } from '../src/';
-import GridItem from '../src/components/GridItem';
+import { easings, transitions } from '../../';
+import GridItem from '../GridItem';
 
 
 const mockProps = {
@@ -34,21 +33,22 @@ const mockProps = {
 
 let clock = null;
 
+
 describe('<GridItem />', () => {
-  before(() => {
+  beforeEach(() => {
     clock = sinon.useFakeTimers();
   });
 
-  after(() => {
+  afterEach(() => {
     clock.restore();
   });
 
 
-  it('Should be call handleMounted/handleUnmount', () => {
+  test('Should be call handleMounted/handleUnmount', () => {
     const handleMounted = sinon.spy();
     const handleUnmount = sinon.spy();
 
-    assert(handleMounted.called === false);
+    expect(handleMounted.called).toBe(false);
 
     const wrapper = mount(
       <GridItem
@@ -58,14 +58,14 @@ describe('<GridItem />', () => {
       />
     );
 
-    assert(handleMounted.called === true);
+    expect(handleMounted.called).toBe(true);
 
     wrapper.unmount();
-    assert(handleUnmount.called === true);
+    expect(handleUnmount.called).toBe(true);
   });
 
 
-  it('Should be call transition style function', () => {
+  test('Should be call transition style function', () => {
     const spyFunctions = {
       appear: sinon.spy(),
       appeared: sinon.spy(),
@@ -87,22 +87,22 @@ describe('<GridItem />', () => {
     const gridItem = wrapper.instance();
     const noop = () => {};
 
-    assert(spyFunctions.appear.called === true);
+    expect(spyFunctions.appear.called).toBe(true);
 
     gridItem.componentDidAppear(() => {});
     clock.tick(300);
-    assert(spyFunctions.appeared.called === true);
+    expect(spyFunctions.appeared.called).toBe(true);
 
     clock.tick(300);
     gridItem.componentWillEnter(noop);
-    assert(spyFunctions.enter.called === true);
+    expect(spyFunctions.enter.called).toBe(true);
 
     clock.tick(300);
     gridItem.componentDidEnter();
-    assert(spyFunctions.entered.called === true);
+    expect(spyFunctions.entered.called).toBe(true);
 
     clock.tick(300);
     gridItem.componentWillLeave(noop);
-    assert(spyFunctions.leaved.called === true);
+    expect(spyFunctions.leaved.called).toBe(true);
   });
 });
