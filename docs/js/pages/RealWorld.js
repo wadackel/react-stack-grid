@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React from 'react';
 import StackGrid, { transitions, easings } from '../../../src/';
+
 
 const transition = transitions.scaleDown;
 
@@ -30,33 +31,31 @@ const images = [
 ];
 
 
-export default class RealWorld extends Component {
-  render() {
-    return (
-      <StackGrid
-        monitorImagesLoaded
-        columnWidth={300}
-        duration={600}
-        gutterWidth={15}
-        gutterHeight={15}
-        easing={easings.cubicOut}
-        appearDelay={60}
-        appear={transition.appear}
-        appeared={transition.appeared}
-        enter={transition.enter}
-        entered={transition.entered}
-        leaved={transition.leaved}
+const RealWorld = () => (
+  <StackGrid
+    monitorImagesLoaded
+    columnWidth={300}
+    duration={600}
+    gutterWidth={15}
+    gutterHeight={15}
+    easing={easings.cubicOut}
+    appearDelay={60}
+    appear={transition.appear}
+    appeared={transition.appeared}
+    enter={transition.enter}
+    entered={transition.entered}
+    leaved={transition.leaved}
+  >
+    {images.map(obj =>
+      (<figure
+        key={obj.src}
+        className="image"
       >
-        {images.map(obj =>
-          (<figure
-            key={obj.src}
-            className="image"
-          >
-            <img src={obj.src} alt={obj.label} />
-            <figcaption>{obj.label}</figcaption>
-          </figure>)
-        )}
-      </StackGrid>
-    );
-  }
-}
+        <img src={obj.src} alt={obj.label} />
+        <figcaption>{obj.label}</figcaption>
+      </figure>)
+    )}
+  </StackGrid>
+);
+
+export default RealWorld;

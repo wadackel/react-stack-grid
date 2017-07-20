@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import { easings, transitions } from '../../../src/';

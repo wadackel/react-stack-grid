@@ -1,4 +1,6 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import StackGrid, { transitions, easings } from '../../../src/';
 import DemoControl from '../components/DemoControl';
@@ -21,7 +23,7 @@ export default class Home extends Component {
 
     const items = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i += 1) {
       items.push(this.createItem());
     }
 
@@ -37,7 +39,7 @@ export default class Home extends Component {
 
   createItem() {
     const id = Math.random().toString(36).substr(2, 9);
-    const height = Math.floor(Math.random() * (300 - 80) + 80);
+    const height = Math.floor((Math.random() * (300 - 80)) + 80);
     const modifier = itemModifier[Math.floor(Math.random() * itemModifier.length)];
 
     return { id, height, modifier };
@@ -49,7 +51,7 @@ export default class Home extends Component {
 
     while (i) {
       const j = Math.floor(Math.random() * i);
-      const t = newItems[--i];
+      const t = newItems[--i]; // eslint-disable-line no-plusplus
       newItems[i] = newItems[j];
       newItems[j] = t;
     }
@@ -72,7 +74,7 @@ export default class Home extends Component {
   multipleAppendItem = () => {
     const newItems = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       newItems.push(this.createItem());
     }
 
