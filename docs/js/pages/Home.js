@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import StackGrid, { transitions, easings } from "../../../src/";
-import DemoControl from "../components/DemoControl";
+import React, { Component } from 'react';
+import StackGrid, { transitions, easings } from '../../../src/';
+import DemoControl from '../components/DemoControl';
 
 const itemModifier = [
-  "pattern1",
-  "pattern2",
-  "pattern3",
-  "gray",
-  "gray-light",
-  "gray-dark",
-  "yellow",
-  "pink",
-  "purple"
+  'pattern1',
+  'pattern2',
+  'pattern3',
+  'gray',
+  'gray-light',
+  'gray-dark',
+  'yellow',
+  'pink',
+  'purple',
 ];
 
 export default class Home extends Component {
@@ -31,7 +31,7 @@ export default class Home extends Component {
       columnWidth: 150,
       gutter: 5,
       easing: easings.quartOut,
-      transition: "fadeDown"
+      transition: 'fadeDown',
     };
   }
 
@@ -59,13 +59,13 @@ export default class Home extends Component {
 
   prependItem = () => {
     this.setState({
-      items: [this.createItem(), ...this.state.items]
+      items: [this.createItem(), ...this.state.items],
     });
   }
 
   appendItem = () => {
     this.setState({
-      items: [...this.state.items, this.createItem()]
+      items: [...this.state.items, this.createItem()],
     });
   }
 
@@ -77,33 +77,33 @@ export default class Home extends Component {
     }
 
     this.setState({
-      items: [...this.state.items, ...newItems]
+      items: [...this.state.items, ...newItems],
     });
   }
 
-  removeItem = id => {
+  removeItem = (id) => {
     this.setState({
-      items: this.state.items.filter(o => o.id !== id)
+      items: this.state.items.filter(o => o.id !== id),
     });
   }
 
-  handleDurationChange = duration => {
+  handleDurationChange = (duration) => {
     this.setState({ duration });
   }
 
-  handleColumnWidthChange = columnWidth => {
+  handleColumnWidthChange = (columnWidth) => {
     this.setState({ columnWidth });
   }
 
-  handleGutterChange = gutter => {
+  handleGutterChange = (gutter) => {
     this.setState({ gutter });
   }
 
-  handleEasingChange = easing => {
+  handleEasingChange = (easing) => {
     this.setState({ easing });
   }
 
-  handleTransitionChange = transition => {
+  handleTransitionChange = (transition) => {
     this.setState({ transition });
   }
 
@@ -114,7 +114,7 @@ export default class Home extends Component {
       columnWidth,
       gutter,
       easing,
-      transition: transitionSelect
+      transition: transitionSelect,
     } = this.state;
 
     const transition = transitions[transitionSelect];
@@ -151,12 +151,12 @@ export default class Home extends Component {
           leaved={transition.leaved}
         >
           {items.map(item =>
-            <div
+            (<div
               key={item.id}
               className={`item item--${item.modifier}`}
               style={{ height: item.height }}
               onClick={() => this.removeItem(item.id)}
-            />
+            />)
           )}
         </StackGrid>
       </div>

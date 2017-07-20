@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import { IndexLink, Link } from "react-router";
+import React, { Component } from 'react';
+import { IndexLink, Link } from 'react-router';
 
 export default class Header extends Component {
   render() {

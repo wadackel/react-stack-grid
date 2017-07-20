@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import Slider from "rc-slider";
-import { easings, transitions } from "../../../src/";
+import React, { Component } from 'react';
+import Slider from 'rc-slider';
+import { easings, transitions } from '../../../src/';
 
 const selectEasingOptions = Object.keys(easings).map(k => ({
   label: k,
-  value: easings[k]
+  value: easings[k],
 }));
 
 const selectTransitionOptions = Object.keys(transitions).map(k => ({
   label: k,
-  value: k
+  value: k,
 }));
 
 
@@ -31,23 +31,23 @@ export default class DemoControl extends Component {
     this.props.onMultipleAppend();
   }
 
-  handleDurationChange = value => {
+  handleDurationChange = (value) => {
     this.props.onDurationChange(value);
   }
 
-  handleColumnWidthChange = value => {
+  handleColumnWidthChange = (value) => {
     this.props.onColumnWidthChange(value);
   }
 
-  handleGutterChange = value => {
+  handleGutterChange = (value) => {
     this.props.onGutterChange(value);
   }
 
-  handleEasingChange = e => {
+  handleEasingChange = (e) => {
     this.props.onEasingChange(e.target.value);
   }
 
-  handleTransitionChange = e => {
+  handleTransitionChange = (e) => {
     this.props.onTransitionChange(e.target.value);
   }
 
@@ -57,7 +57,7 @@ export default class DemoControl extends Component {
       columnWidth,
       gutter,
       easing,
-      transition
+      transition,
     } = this.props;
 
     return (
