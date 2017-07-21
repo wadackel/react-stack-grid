@@ -1,18 +1,20 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import StackGrid, { transitions, easings } from "../../../src/";
-import DemoControl from "../components/DemoControl";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { Component } from 'react';
+import StackGrid, { transitions, easings } from '../../../src/';
+import DemoControl from '../components/DemoControl';
 
 const itemModifier = [
-  "pattern1",
-  "pattern2",
-  "pattern3",
-  "gray",
-  "gray-light",
-  "gray-dark",
-  "yellow",
-  "pink",
-  "purple"
+  'pattern1',
+  'pattern2',
+  'pattern3',
+  'gray',
+  'gray-light',
+  'gray-dark',
+  'yellow',
+  'pink',
+  'purple',
 ];
 
 export default class Home extends Component {
@@ -21,7 +23,7 @@ export default class Home extends Component {
 
     const items = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i += 1) {
       items.push(this.createItem());
     }
 
@@ -31,13 +33,13 @@ export default class Home extends Component {
       columnWidth: 150,
       gutter: 5,
       easing: easings.quartOut,
-      transition: "fadeDown"
+      transition: 'fadeDown',
     };
   }
 
   createItem() {
     const id = Math.random().toString(36).substr(2, 9);
-    const height = Math.floor(Math.random() * (300 - 80) + 80);
+    const height = Math.floor((Math.random() * (300 - 80)) + 80);
     const modifier = itemModifier[Math.floor(Math.random() * itemModifier.length)];
 
     return { id, height, modifier };
@@ -49,7 +51,7 @@ export default class Home extends Component {
 
     while (i) {
       const j = Math.floor(Math.random() * i);
-      const t = newItems[--i];
+      const t = newItems[--i]; // eslint-disable-line no-plusplus
       newItems[i] = newItems[j];
       newItems[j] = t;
     }
@@ -59,51 +61,51 @@ export default class Home extends Component {
 
   prependItem = () => {
     this.setState({
-      items: [this.createItem(), ...this.state.items]
+      items: [this.createItem(), ...this.state.items],
     });
   }
 
   appendItem = () => {
     this.setState({
-      items: [...this.state.items, this.createItem()]
+      items: [...this.state.items, this.createItem()],
     });
   }
 
   multipleAppendItem = () => {
     const newItems = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       newItems.push(this.createItem());
     }
 
     this.setState({
-      items: [...this.state.items, ...newItems]
+      items: [...this.state.items, ...newItems],
     });
   }
 
-  removeItem = id => {
+  removeItem = (id) => {
     this.setState({
-      items: this.state.items.filter(o => o.id !== id)
+      items: this.state.items.filter(o => o.id !== id),
     });
   }
 
-  handleDurationChange = duration => {
+  handleDurationChange = (duration) => {
     this.setState({ duration });
   }
 
-  handleColumnWidthChange = columnWidth => {
+  handleColumnWidthChange = (columnWidth) => {
     this.setState({ columnWidth });
   }
 
-  handleGutterChange = gutter => {
+  handleGutterChange = (gutter) => {
     this.setState({ gutter });
   }
 
-  handleEasingChange = easing => {
+  handleEasingChange = (easing) => {
     this.setState({ easing });
   }
 
-  handleTransitionChange = transition => {
+  handleTransitionChange = (transition) => {
     this.setState({ transition });
   }
 
@@ -114,7 +116,7 @@ export default class Home extends Component {
       columnWidth,
       gutter,
       easing,
-      transition: transitionSelect
+      transition: transitionSelect,
     } = this.state;
 
     const transition = transitions[transitionSelect];
@@ -151,12 +153,12 @@ export default class Home extends Component {
           leaved={transition.leaved}
         >
           {items.map(item =>
-            <div
+            (<div
               key={item.id}
               className={`item item--${item.modifier}`}
               style={{ height: item.height }}
               onClick={() => this.removeItem(item.id)}
-            />
+            />)
           )}
         </StackGrid>
       </div>

@@ -3,21 +3,23 @@
     "es6": true,
     "browser": true,
     "node": true,
-    "mocha": true
+    "jest/globals": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "plugins": [
+    "jest",
     "flowtype"
   ],
   "extends": [
     "airbnb",
+    "plugin:jest/recommended",
     "plugin:flowtype/recommended"
   ],
   "rules": {
@@ -37,6 +39,8 @@
     "react/sort-comp": "off",
     "react/require-default-props": "off",
     "react/no-multi-comp": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/label-has-for": "off",
     "jsx-a11y/img-has-alt": "off"
   }
 }

@@ -5,11 +5,7 @@
     "react",
     "stage-1"
   ],
-  "env": {
-    "development": {
-      "presets": [
-        "power-assert"
-      ]
-    }
-  }
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
 }

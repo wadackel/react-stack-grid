@@ -61,6 +61,7 @@ type Props = {
   children: React$Element<any>;
   className?: string;
   style: Object;
+  gridRef?: Function;
   component: string;
   columnWidth: number | string;
   gutterWidth: number;
@@ -92,18 +93,20 @@ type InlineState = {
   columnWidth: number;
 };
 
-type InlineProps = $All<Props, {
+type InlineProps = Props & {
+  refCallback: Function;
   size: {
     width: number;
     height: number;
   }
-}>;
+};
 
 /* eslint-disable react/no-unused-prop-types */
 const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
+  gridRef: PropTypes.func,
   component: PropTypes.string,
   columnWidth: PropTypes.oneOfType([
     PropTypes.number,
@@ -250,8 +253,12 @@ export class GridInline extends Component {
     };
   }
 
-  updateLayout(props: InlineProps): void {
-    this.setStateIfNeeded(this.doLayout(props));
+  updateLayout(props: ?InlineProps): void {
+    if (!props) {
+      this.setStateIfNeeded(this.doLayout(this.props));
+    } else {
+      this.setStateIfNeeded(this.doLayout(props));
+    }
   }
 
   handleItemMounted = (item: GridItem) => {
@@ -285,6 +292,10 @@ export class GridInline extends Component {
     }
   }
 
+  handleRef = () => {
+    this.props.refCallback(this);
+  };
+
   render() {
     const {
       /* eslint-disable no-unused-vars */
@@ -293,6 +304,7 @@ export class GridInline extends Component {
       columnWidth: rawColumnWidth,
       monitorImagesLoaded,
       enableSSR,
+      refCallback,
       /* eslint-enable no-unused-vars */
       className,
       style,
@@ -324,6 +336,7 @@ export class GridInline extends Component {
           transition: transition(['height'], rest.duration, easings.easeOut),
           height,
         }}
+        ref={this.handleRef}
       >
         {validChildren.map((child, i) =>
           (<GridItem
@@ -352,12 +365,11 @@ const SizeAwareGridInline = sizeMe({
 
 
 export default class StackGrid extends Component {
-  props: Props;
-
   static propTypes = propTypes;
 
   static defaultProps = {
     style: {},
+    gridRef: null,
     component: 'div',
     columnWidth: 150,
     gutterWidth: 5,
@@ -377,8 +389,35 @@ export default class StackGrid extends Component {
     enableSSR: false,
   };
 
+  props: Props;
+  grid: GridInline;
+
+  updateLayout() {
+    this.grid.updateLayout();
+  }
+
+  handleRef = (grid: GridInline) => {
+    this.grid = grid;
+
+    if (typeof this.props.gridRef === 'function') {
+      this.props.gridRef(this);
+    }
+  };
+
   render() {
-    sizeMe.enableSSRBehaviour = this.props.enableSSR;
-    return <SizeAwareGridInline {...this.props} />;
+    const {
+      enableSSR,
+      gridRef,
+      ...rest
+    } = this.props;
+
+    sizeMe.enableSSRBehaviour = enableSSR;
+
+    return (
+      <SizeAwareGridInline
+        {...rest}
+        refCallback={this.handleRef}
+      />
+    );
   }
 }

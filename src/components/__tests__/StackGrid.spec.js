@@ -1,8 +1,8 @@
 import React from 'react';
-import assert from 'power-assert';
 import { mount } from 'enzyme';
-import StackGrid, { easings, transitions } from '../src/';
-import { GridInline } from '../src/components/StackGrid';
+import StackGrid, { easings, transitions } from '../../';
+import { GridInline } from '../StackGrid';
+
 
 const mockProps = {
   size: {
@@ -10,6 +10,7 @@ const mockProps = {
     height: 0,
   },
   style: {},
+  refCallback: () => {},
   component: 'div',
   columnWidth: 150,
   gutterWidth: 5,
@@ -30,16 +31,16 @@ const mockProps = {
 
 
 describe('<StackGrid /> (GridInline)', () => {
-  it('Should not be render children', () => {
+  test('Should not be render children', () => {
     const wrapper = mount(
       <StackGrid />
     );
 
-    assert(wrapper.children().length === 0);
+    expect(wrapper.children().length).toBe(0);
   });
 
 
-  it('Should be pass the base props', () => {
+  test('Should be pass the base props', () => {
     const wrapper = mount(
       <StackGrid
         className="rsg-grid"
@@ -52,18 +53,15 @@ describe('<StackGrid /> (GridInline)', () => {
       </StackGrid>
     );
 
-    assert(wrapper.props().className === 'rsg-grid');
-    assert.deepStrictEqual(
-      wrapper.props().style,
-      {
-        width: 960,
-        background: '#fff',
-      }
-    );
+    expect(wrapper.props().className).toBe('rsg-grid');
+    expect(wrapper.props().style).toEqual({
+      width: 960,
+      background: '#fff',
+    });
   });
 
 
-  it('Should be render with specify component', () => {
+  test('Should be render with specify component', () => {
     const wrapper = mount(
       <GridInline
         {...mockProps}
@@ -74,11 +72,11 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    assert(wrapper.find('section.rsg-grid').length === 1);
+    expect(wrapper.find('section.rsg-grid').length).toBe(1);
   });
 
 
-  it('Should be render children', () => {
+  test('Should be render children', () => {
     const wrapper = mount(
       <GridInline {...mockProps}>
         <div className="item" key="1">ITEM 1</div>
@@ -87,6 +85,24 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    assert(wrapper.find('div.item').length === 3);
+    expect(wrapper.find('div.item').length).toBe(3);
+  });
+
+
+  test('Should be get grid ref', () => {
+    const callback = jest.fn();
+    const wrapper = mount(
+      <GridInline
+        {...mockProps}
+        refCallback={callback}
+      >
+        <div key="1">Foo</div>
+      </GridInline>
+    );
+
+    expect(callback.mock.calls.length).toBe(1);
+    expect(callback.mock.calls[0]).toEqual([
+      wrapper.instance(),
+    ]);
   });
 });

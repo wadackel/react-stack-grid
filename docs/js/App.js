@@ -1,17 +1,14 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import Header from "./components/Header";
+import React from 'react';
+import Header from './components/Header';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <Header />
+const App = ({ children }) => (
+  <div>
+    <Header />
+    <div className="content">
+      {children}
+    </div>
+  </div>
+);
 
-        <div className="content">
-          {this.props.children}
-        </div>
-      </div>
-    );
-  }
-}
+export default App;
