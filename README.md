@@ -7,11 +7,37 @@
 Pinterest like layout components for React.js.
 
 
+
+
+## Table of Contents
+
+* [Live Demo](#live-demo)
+* [Install](#install)
+* [Quick Example](#quick-example)
+* [Props](#props)
+* [Instance API](#instance-api)
+  * [updateLayout(): void](#updatelayout-void)
+* [Animations](#animations)
+* [Tips](#tips)
+  * [Performance when using images](#performance-when-using-images)
+  * [When animation is unnecessary](#when-animation-is-unnecessary)
+  * [How to manually update layout ?](#how-to-manually-update-layout)
+* [Thanks](#thanks)
+* [License](#license)
+* [ChangeLog](#changelog)
+* [Author](#author)
+* [Development](#development)
+* [Contribution](#contribution)
+
+
+
+
 ## Live Demo
 
 ![Screenshot](https://raw.githubusercontent.com/tsuyoshiwada/react-stack-grid/images/screenshot.png)
 
 [https://tsuyoshiwada.github.io/react-stack-grid/](https://tsuyoshiwada.github.io/react-stack-grid/)
+
 
 
 
@@ -22,6 +48,8 @@ You can install the [react-stack-grid](https://www.npmjs.com/package/react-stack
 ```bash
 $ npm install react-stack-grid
 ```
+
+
 
 
 ## Quick Example
@@ -50,6 +78,8 @@ class MyComponent extends Component {
 width of parent is managed by [react-sizeme](https://github.com/ctrlplusb/react-sizeme).
 
 
+
+
 ## Props
 
 You can set the following properties.
@@ -58,6 +88,7 @@ You can set the following properties.
 |:----------------------|:------------------------------------------------------------|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
 | `className`           | `PropTypes.string`                                          | `undefined`                      | Specify `className` of component.                                                                                                       |
 | `style`               | `PropTypes.object`                                          | `{}`                             | Original style of component. Following styles are ignored. (`position`, `height`, `transition`)                                         |
+| `gridRef`             | `PropTypes.func`                                            | `null`                           | Reference the instance of StackGrid. Unlike ordinary `ref`, it accepts only functions.                                                  |
 | `component`           | `PropTypes.string`                                          | `"div"`                          | See [ReactTransitionGroup](https://facebook.github.io/react/docs/animation.html#rendering-a-different-component)                        |
 | `columnWidth`         | `PropTypes.oneOfType([PropTypes.number, PropTypes.string])` | `150`                            | Specify column width as an number(`px`), or percentage string. (Example `"33.33%"`)                                                     |
 | `gutterWidth`         | `PropTypes.number`                                          | `5`                              | Specify gutter width as an number.                                                                                                      |
@@ -75,6 +106,16 @@ You can set the following properties.
 | `vendorPrefix`        | `PropTypes.bool`                                            | `false`                          | If set to `true`, add a vendor prefix to styles add dynamically.                                                                        |
 | `userAgent`           | `PropTypes.string`                                          | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
 | `enableSSR`           | `PropTypes.bool`                                            | `false`                          | Render component on the server side. [More info](https://github.com/ctrlplusb/react-sizeme#server-side-rendering).                      |
+
+
+
+
+## Instance API
+
+### updateLayout(): void
+
+Update the current layout.
+
 
 
 
@@ -138,7 +179,6 @@ Please try actual demonstration in [live demo](https://tsuyoshiwada.github.io/re
 
 
 
-
 ## Tips
 
 
@@ -163,6 +203,32 @@ If it's not necessary, specify `0` for `duration` property.
 ```
 
 
+### How to manually update layout ?
+
+If the size of an item is changed by an action such as a click event, there are cases where you want to update the layout manually.  
+You can manually update the layout by referring to the StackGrid instance with `gridRef` and executing the`updateLayout()` method.
+
+```javascript
+class MyComponent extends React.Component {
+
+  // When the size of the item is changed...
+  something = () => {
+    this.grid.updateLayout();
+  };
+
+  render() {
+    return (
+      <StackGrid
+        gridRef={grid => this.grid = grid}
+      >
+        {/* items ... */}
+      </StackGrid>
+    );
+  }
+}
+```
+
+
 
 
 ## Thanks
@@ -172,9 +238,11 @@ If it's not necessary, specify `0` for `duration` property.
 
 
 
+
 ## License
 
 Released under the [MIT Licence](https://raw.githubusercontent.com/tsuyoshiwada/react-stack-grid/master/LICENSE)
+
 
 
 
@@ -184,9 +252,11 @@ See [CHANGELOG.md](./CHANGELOG.md)
 
 
 
+
 ## Author
 
 [tsuyoshiwada](https://github.com/tsuyoshiwada)
+
 
 
 
@@ -222,6 +292,7 @@ Generates build file.
 ```bash
 $ npm run build
 ```
+
 
 
 ## Contribution
