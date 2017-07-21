@@ -1,3 +1,9 @@
+## 0.3.0
+
+* Add `gridRef` props. Thanks for [@mquandalle](https://github.com/mquandalle) and [@derwydd](https://github.com/derwydd) !
+
+
+
 ## 0.2.2
 
 * Fix calculations for percentage columns width [#16](https://github.com/tsuyoshiwada/react-stack-grid/pull/16)  
