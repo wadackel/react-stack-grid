@@ -27,6 +27,7 @@ const mockProps = {
   monitorImagesLoaded: false,
   vendorPrefix: true,
   userAgent: null,
+  onLayout: () => {},
 };
 
 
@@ -104,5 +105,27 @@ describe('<StackGrid /> (GridInline)', () => {
     expect(callback.mock.calls[0]).toEqual([
       wrapper.instance(),
     ]);
+  });
+
+
+  test('Should be call onLayout', () => {
+    const callback = jest.fn();
+    const wrapper = mount(
+      <GridInline
+        {...mockProps}
+        onLayout={callback}
+      >
+        <div key="1">Foo</div>
+      </GridInline>
+    );
+
+    expect(callback.mock.calls.length).toBe(1);
+
+    wrapper.setProps({
+      ...mockProps,
+      size: { width: 300, height: 0 },
+    });
+
+    expect(callback.mock.calls.length).toBe(2);
   });
 });
