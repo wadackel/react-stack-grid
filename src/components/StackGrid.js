@@ -79,6 +79,7 @@ type Props = {
   vendorPrefix: boolean;
   userAgent: ?string;
   enableSSR: boolean;
+  onLayout: Function;
 };
 
 type InlineState = {
@@ -130,6 +131,7 @@ const propTypes = {
   vendorPrefix: PropTypes.bool,
   userAgent: PropTypes.string,
   enableSSR: PropTypes.bool,
+  onLayout: PropTypes.func,
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -199,9 +201,17 @@ export class GridInline extends Component {
 
 
   doLayout(props: InlineProps): InlineState {
-    return ExecutionEnvironment.canUseDOM
-      ? this.doLayoutForClient(props)
-      : this.doLayoutForSSR(props);
+    if (!ExecutionEnvironment.canUseDOM) {
+      return this.doLayoutForSSR(props);
+    }
+
+    const results = this.doLayoutForClient(props);
+
+    if (this.mounted && typeof this.props.onLayout === 'function') {
+      this.props.onLayout();
+    }
+
+    return results;
   }
 
   doLayoutForClient(props: InlineProps): InlineState {
@@ -304,6 +314,7 @@ export class GridInline extends Component {
       columnWidth: rawColumnWidth,
       monitorImagesLoaded,
       enableSSR,
+      onLayout,
       refCallback,
       /* eslint-enable no-unused-vars */
       className,
@@ -387,6 +398,7 @@ export default class StackGrid extends Component {
     vendorPrefix: true,
     userAgent: null,
     enableSSR: false,
+    onLayout: null,
   };
 
   props: Props;
