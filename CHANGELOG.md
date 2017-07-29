@@ -1,3 +1,9 @@
+## 0.4.0
+
+* Add `onLayout` props. Thanks for [@jarib](https://github.com/jarib) !
+
+
+
 ## 0.3.0
 
 * Add `gridRef` props. Thanks for [@mquandalle](https://github.com/mquandalle) and [@derwydd](https://github.com/derwydd) !
