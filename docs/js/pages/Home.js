@@ -151,6 +151,9 @@ export default class Home extends Component {
           enter={transition.enter}
           entered={transition.entered}
           leaved={transition.leaved}
+          onLayout={() => {
+            console.log('[DEMO] `onLayout()` has been called.'); // eslint-disable-line
+          }}
         >
           {items.map(item =>
             (<div
