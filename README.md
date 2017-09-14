@@ -107,7 +107,7 @@ You can set the following properties.
 | `userAgent`           | `PropTypes.string`                                          | `undefined`                      | Specify userAgent for determinig the vendor prefix. See [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer). |
 | `enableSSR`           | `PropTypes.bool`                                            | `false`                          | Render component on the server side. [More info](https://github.com/ctrlplusb/react-sizeme#server-side-rendering).                      |
 | `onLayout`            | `PropTypes.func`                                            | `null`                           | It is called at the timing when the layout is confirmed, or at the updated timing. (Called only by client.)                             |
-
+| `horizontal`          | `PropTypes.bool`                                            | `false`                          | Транспонированный (горизонтальный) порядок отрисовки элементов.                                                                         |
 
 
 
