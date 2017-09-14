@@ -221,6 +221,7 @@ export class GridInline extends Component {
       columnWidth: rawColumnWidth,
       gutterWidth,
       gutterHeight,
+      horizontal,
     } = props;
 
     const childArray = React.Children.toArray(props.children);
@@ -231,16 +232,37 @@ export class GridInline extends Component {
     );
     const columnHeights = createArray(0, maxColumn);
 
-    const rects = childArray.map((child) => {
-      const column = columnHeights.indexOf(Math.min(...columnHeights));
-      const height = this.getItemHeight(child);
-      const left = (column * columnWidth) + (column * gutterWidth);
-      const top = columnHeights[column];
+    let rects;
+    if (!horizontal) {
+      rects = childArray.map((child) => {
+        const column = columnHeights.indexOf(Math.min(...columnHeights));
+        const height = this.getItemHeight(child);
+        const left = (column * columnWidth) + (column * gutterWidth);
+        const top = columnHeights[column];
 
-      columnHeights[column] += Math.round(height) + gutterHeight;
+        columnHeights[column] += Math.round(height) + gutterHeight;
 
-      return { top, left, width: columnWidth, height };
-    });
+        return { top, left, width: columnWidth, height };
+      });
+    } else {
+      const sumHeights = childArray.reduce((sum, child) => sum + this.getItemHeight(child), 0);
+      const maxHeight = sumHeights / maxColumn;
+
+      let currentColumn = 0;
+      rects = childArray.map((child) => {
+        const column = currentColumn;
+        const height = this.getItemHeight(child);
+        const left = (column * columnWidth) + (column * gutterWidth);
+        const top = columnHeights[column];
+
+        columnHeights[column] += Math.round(height) + gutterHeight;
+        if (columnHeights[column] >= maxHeight) {
+          currentColumn += 1;
+        }
+
+        return { top, left, width: columnWidth, height };
+      });
+    }
 
     const width = (maxColumn * columnWidth) + ((maxColumn - 1) * gutterWidth);
     const height = Math.max(...columnHeights) - gutterHeight;
@@ -400,7 +422,7 @@ export default class StackGrid extends Component {
     userAgent: null,
     enableSSR: false,
     onLayout: null,
-    horizontal: false
+    horizontal: false,
   };
 
   props: Props;
