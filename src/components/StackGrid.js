@@ -250,7 +250,7 @@ export class GridInline extends Component {
 
       let currentColumn = 0;
       rects = childArray.map((child) => {
-        const column = currentColumn;
+        const column = currentColumn >= maxColumn - 1 ? maxColumn - 1 : currentColumn;
         const height = this.getItemHeight(child);
         const left = (column * columnWidth) + (column * gutterWidth);
         const top = columnHeights[column];
@@ -338,6 +338,7 @@ export class GridInline extends Component {
       monitorImagesLoaded,
       enableSSR,
       onLayout,
+      horizontal,
       refCallback,
       /* eslint-enable no-unused-vars */
       className,
@@ -360,6 +361,7 @@ export class GridInline extends Component {
 
 
     /* eslint-disable no-return-assign */
+    console.log(height);
     return (
       <TransitionGroup
         component={component}
