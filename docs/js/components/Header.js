@@ -9,6 +9,7 @@ const Header = () => (
     <nav>
       <ul>
         <li><IndexLink to="/" activeClassName="is-active">Home</IndexLink></li>
+        <li><Link to="/horizontal/" activeClassName="is-active">Horizontal</Link></li>
         <li><Link to="/change-size/" activeClassName="is-active">Change Size</Link></li>
         <li><Link to="/real-world/" activeClassName="is-active">Real World</Link></li>
         <li><a href="https://github.com/tsuyoshiwada/react-stack-grid">GitHub</a></li>
