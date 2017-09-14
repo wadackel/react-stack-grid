@@ -132,6 +132,7 @@ const propTypes = {
   userAgent: PropTypes.string,
   enableSSR: PropTypes.bool,
   onLayout: PropTypes.func,
+  horizontal: PropTypes.bool,
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -399,6 +400,7 @@ export default class StackGrid extends Component {
     userAgent: null,
     enableSSR: false,
     onLayout: null,
+    horizontal: false
   };
 
   props: Props;
