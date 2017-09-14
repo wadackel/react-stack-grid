@@ -245,7 +245,8 @@ export class GridInline extends Component {
         return { top, left, width: columnWidth, height };
       });
     } else {
-      const sumHeights = childArray.reduce((sum, child) => sum + this.getItemHeight(child), 0);
+      const sumHeights = childArray.reduce(
+        (sum, child) => sum + Math.round(this.getItemHeight(child)) + gutterHeight, 0);
       const maxHeight = sumHeights / maxColumn;
 
       let currentColumn = 0;
