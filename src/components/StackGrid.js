@@ -361,7 +361,6 @@ export class GridInline extends Component {
 
 
     /* eslint-disable no-return-assign */
-    console.log(height);
     return (
       <TransitionGroup
         component={component}
