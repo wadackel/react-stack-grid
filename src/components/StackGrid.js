@@ -80,6 +80,7 @@ type Props = {
   userAgent: ?string;
   enableSSR: boolean;
   onLayout: Function;
+  horizontal: boolean;
 };
 
 type InlineState = {
@@ -106,7 +107,7 @@ type InlineProps = Props & {
 const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   gridRef: PropTypes.func,
   component: PropTypes.string,
   columnWidth: PropTypes.oneOfType([
