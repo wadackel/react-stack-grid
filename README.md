@@ -57,7 +57,7 @@ $ npm install react-stack-grid
 Following code is simplest usage.
 
 ```javascript
-import React, { Component } from "react-stack-grid";
+import React, { Component } from "react";
 import StackGrid from "react-stack-grid";
 
 class MyComponent extends Component {
