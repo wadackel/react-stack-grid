@@ -230,6 +230,36 @@ class MyComponent extends React.Component {
 ```
 
 
+### Responsive layout
+
+You can get width using [react-sizeme](https://github.com/ctrlplusb/react-sizeme) and change columnWidth according to width.  
+This is a solution, but we can respond in other ways!
+
+```javascript
+import React, { Component } from 'react';
+import sizeMe from 'react-sizeme';
+import StackGrid from 'react-stack-grid';
+
+class YourComponent extends Component {
+  render() {
+    const { width } = this.props;
+
+    return (
+      <StackGrid
+        // more...
+        columnWidth={width <= 768 ? '100%' : '33.33%'}
+      >
+        // Grid items...
+      </StackGrid>
+    );
+  }
+}
+
+export default sizeMe()(YourComponent);
+```
+
+
+
 
 
 ## Thanks
