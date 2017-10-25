@@ -129,7 +129,7 @@ describe('<StackGrid /> (GridInline)', () => {
     expect(callback.mock.calls.length).toBe(2);
   });
 
-  test('Should be use horizontal', () => {
+  test('Should be horizontal', () => {
     const testMockProps = Object.assign({}, mockProps, {
       size: {
         width: 320,
@@ -151,5 +151,34 @@ describe('<StackGrid /> (GridInline)', () => {
     expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(7.5px) translateY(15px)');
     expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(162.5px) translateY(10px)');
     expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(162.5px) translateY(15px)');
+  });
+
+  test('Should be horizontal RTL', () => {
+    const testMockProps = Object.assign({}, mockProps, {
+      size: {
+        width: 320,
+        height: 0,
+      },
+      rtl: true,
+      horizontal: true,
+    });
+
+    const wrapper = mount(
+      <GridInline {...testMockProps}>
+        <div className="item" key="1">ITEM 1</div>
+        <div className="item" key="2">ITEM 2</div>
+        <div className="item" key="3">ITEM 3</div>
+        <div className="item" key="4">ITEM 4</div>
+      </GridInline>
+    );
+    expect(wrapper.find('span').at(0).prop('style').right).toBe(0);
+    expect(wrapper.find('span').at(1).prop('style').right).toBe(0);
+    expect(wrapper.find('span').at(2).prop('style').right).toBe(0);
+    expect(wrapper.find('span').at(3).prop('style').right).toBe(0);
+
+    expect(wrapper.find('span').at(0).prop('style').transform).toBe('translateX(-7.5px) translateY(10px)');
+    expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(-7.5px) translateY(15px)');
+    expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(-162.5px) translateY(10px)');
+    expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(-162.5px) translateY(15px)');
   });
 });

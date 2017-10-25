@@ -29,6 +29,7 @@ type Props = {
   userAgent: ?string;
   onMounted: Function;
   onUnmount: Function;
+  rtl: boolean;
 };
 
 type State = Object;
@@ -39,8 +40,8 @@ const getTransitionStyles = (type: string, props: Props): Object => {
   return props[type](rect, containerSize, index);
 };
 
-const getPositionStyles = (rect: Rect, zIndex: number): Object => ({
-  translateX: `${rect.left}px`,
+const getPositionStyles = (rect: Rect, zIndex: number, rtl: boolean): Object => ({
+  translateX: `${rtl ? -rect.left : rect.left}px`,
   translateY: `${rect.top}px`,
   zIndex,
 });
@@ -83,6 +84,7 @@ export default class GridItem extends Component {
     userAgent: PropTypes.string,
     onMounted: PropTypes.func,
     onUnmount: PropTypes.func,
+    rtl: PropTypes.bool,
   };
 
   constructor(props: Props) {
@@ -93,7 +95,7 @@ export default class GridItem extends Component {
     this.node = null;
 
     this.state = {
-      ...getPositionStyles(props.rect, 1),
+      ...getPositionStyles(props.rect, 1, props.rtl),
       ...getTransitionStyles('appear', props),
     };
   }
@@ -115,7 +117,7 @@ export default class GridItem extends Component {
       raf(() => {
         this.setStateIfNeeded({
           ...this.state,
-          ...getPositionStyles(nextProps.rect, 2),
+          ...getPositionStyles(nextProps.rect, 2, nextProps.rtl),
         });
       });
     }
@@ -160,14 +162,14 @@ export default class GridItem extends Component {
     this.setStateIfNeeded({
       ...this.state,
       ...getTransitionStyles('appeared', this.props),
-      ...getPositionStyles(this.props.rect, 1),
+      ...getPositionStyles(this.props.rect, 1, this.props.rtl),
     });
   }
 
   setEnterStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...getPositionStyles(this.props.rect, 2),
+      ...getPositionStyles(this.props.rect, 2, this.props.rtl),
       ...getTransitionStyles('enter', this.props),
     });
   }
@@ -176,14 +178,14 @@ export default class GridItem extends Component {
     this.setStateIfNeeded({
       ...this.state,
       ...getTransitionStyles('entered', this.props),
-      ...getPositionStyles(this.props.rect, 1),
+      ...getPositionStyles(this.props.rect, 1, this.props.rtl),
     });
   }
 
   setLeaveStyles() {
     this.setStateIfNeeded({
       ...this.state,
-      ...getPositionStyles(this.props.rect, 2),
+      ...getPositionStyles(this.props.rect, 2, this.props.rtl),
       ...getTransitionStyles('leaved', this.props),
     });
   }
@@ -209,6 +211,7 @@ export default class GridItem extends Component {
       units,
       vendorPrefix,
       userAgent,
+      rtl,
       ...rest
     } = this.props;
 
@@ -217,7 +220,7 @@ export default class GridItem extends Component {
       display: 'block',
       position: 'absolute',
       top: 0,
-      left: 0,
+      ...(rtl ? { right: 0 } : { left: 0 }),
       width: rect.width,
       transition: transition(['opacity', 'transform'], duration, easing),
     }, units, vendorPrefix, userAgent);

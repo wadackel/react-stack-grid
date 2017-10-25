@@ -81,6 +81,7 @@ type Props = {
   enableSSR: boolean;
   onLayout: Function;
   horizontal: boolean;
+  rtl: boolean;
 };
 
 type InlineState = {
@@ -134,6 +135,7 @@ const propTypes = {
   enableSSR: PropTypes.bool,
   onLayout: PropTypes.func,
   horizontal: PropTypes.bool,
+  rtl: PropTypes.bool,
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -341,6 +343,7 @@ export class GridInline extends Component {
       enableSSR,
       onLayout,
       horizontal,
+      rtl,
       refCallback,
       /* eslint-enable no-unused-vars */
       className,
@@ -382,6 +385,7 @@ export class GridInline extends Component {
             key={child.key}
             itemKey={child.key}
             rect={rects[i]}
+            rtl={rtl}
             containerSize={containerSize}
             onMounted={this.handleItemMounted}
             onUnmount={this.handleItemUnmount}
@@ -426,6 +430,7 @@ export default class StackGrid extends Component {
     enableSSR: false,
     onLayout: null,
     horizontal: false,
+    rtl: false,
   };
 
   props: Props;
