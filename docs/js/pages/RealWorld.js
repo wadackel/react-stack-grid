@@ -31,8 +31,15 @@ const images = [
 ];
 
 
-const RealWorld = () => (
-  <StackGrid
+const RealWorld = () => {
+  // simulating random loading which causes random resizing
+  images.forEach((x) => {
+    setTimeout(() => {
+      const e = document.getElementById(x.src);
+      e.src = x.src;
+    }, Math.random() * 5000);
+  });
+  return (<StackGrid
     monitorImagesLoaded
     columnWidth={300}
     duration={600}
@@ -51,11 +58,11 @@ const RealWorld = () => (
         key={obj.src}
         className="image"
       >
-        <img src={obj.src} alt={obj.label} />
+        <img id={obj.src} alt={obj.label} />
         <figcaption>{obj.label}</figcaption>
       </figure>)
     )}
-  </StackGrid>
-);
+  </StackGrid>);
+};
 
 export default RealWorld;

@@ -2,7 +2,7 @@ declare module "prop-types" {
   declare export default any;
 }
 
-declare module "imagesloaded" {
+declare module "javascript-detect-element-resize" {
   declare export default any;
 }
 
