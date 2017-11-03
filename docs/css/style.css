@@ -160,7 +160,7 @@ button:focus {
 }
 
 .demo-control > div {
-  margin-right: 15px;
+  padding-right: 15px;
 }
 
 .demo-control label {

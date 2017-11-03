@@ -142,7 +142,6 @@ export default class DemoControl extends Component {
           <label>RTL</label>
           <input type="checkbox" checked={rtl} onClick={this.handleRTLChange} />
         </div>
-
       </div>
     );
   }
