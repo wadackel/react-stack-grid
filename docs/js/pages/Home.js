@@ -34,6 +34,7 @@ export default class Home extends Component {
       gutter: 5,
       easing: easings.quartOut,
       transition: 'fadeDown',
+      rtl: false,
     };
   }
 
@@ -109,6 +110,10 @@ export default class Home extends Component {
     this.setState({ transition });
   }
 
+  handleRTLChange = (rtl) => {
+    this.setState({ rtl });
+  }
+
   render() {
     const {
       items,
@@ -117,10 +122,10 @@ export default class Home extends Component {
       gutter,
       easing,
       transition: transitionSelect,
+      rtl,
     } = this.state;
 
     const transition = transitions[transitionSelect];
-
     return (
       <div>
         <DemoControl
@@ -129,6 +134,7 @@ export default class Home extends Component {
           gutter={gutter}
           easing={easing}
           transition={transition}
+          rtl={rtl}
           onShuffle={this.shuffleItems}
           onPrepend={this.prependItem}
           onAppend={this.appendItem}
@@ -138,6 +144,7 @@ export default class Home extends Component {
           onGutterChange={this.handleGutterChange}
           onEasingChange={this.handleEasingChange}
           onTransitionChange={this.handleTransitionChange}
+          onRTLChange={this.handleRTLChange}
         />
 
         <StackGrid
@@ -151,6 +158,7 @@ export default class Home extends Component {
           enter={transition.enter}
           entered={transition.entered}
           leaved={transition.leaved}
+          rtl={rtl}
           onLayout={() => {
             console.log('[DEMO] `onLayout()` has been called.'); // eslint-disable-line
           }}

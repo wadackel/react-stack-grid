@@ -52,6 +52,10 @@ export default class DemoControl extends Component {
     this.props.onTransitionChange(e.target.value);
   }
 
+  handleRTLChange = (e) => {
+    this.props.onRTLChange(e.target.checked);
+  }
+
   render() {
     const {
       duration,
@@ -59,6 +63,7 @@ export default class DemoControl extends Component {
       gutter,
       easing,
       transition,
+      rtl,
     } = this.props;
 
     return (
@@ -132,6 +137,12 @@ export default class DemoControl extends Component {
             )}
           </select>
         </div>
+
+        <div>
+          <label>RTL</label>
+          <input type="checkbox" checked={rtl} onClick={this.handleRTLChange} />
+        </div>
+
       </div>
     );
   }
