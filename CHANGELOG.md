@@ -1,3 +1,15 @@
+## 0.6.0
+
+* Add `rtl` props. Thank you [@azizghuloum](https://github.com/azizghuloum) !
+
+
+
+## 0.5.0
+
+* Add `horizontal` props. Thank you [@ilyalesik](https://github.com/ilyalesik) !
+
+
+
 ## 0.4.0
 
 * Add `onLayout` props. Thanks for [@jarib](https://github.com/jarib) !
