@@ -15,8 +15,7 @@ import * as transitions from '../animations/transitions/';
 
 import type { Units } from '../types/';
 
-const imagesLoaded = ExecutionEnvironment.canUseDOM ? require('imagesloaded') : null;
-
+require('javascript-detect-element-resize');
 
 const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v);
 const isPercentageNumber = (v: any): boolean => typeof v === 'string' && /^\d+(\.\d+)?%$/.test(v);
@@ -300,17 +299,17 @@ export class GridInline extends Component {
 
   handleItemMounted = (item: GridItem) => {
     const { itemKey: key } = item.props;
+
     this.items[key] = item;
-
-    if (this.props.monitorImagesLoaded && typeof imagesLoaded === 'function') {
+    if (this.props.monitorImagesLoaded) {
       const node = ReactDOM.findDOMNode(item);
-      const imgLoad = imagesLoaded(node);
-
-      imgLoad.once('always', () => raf(() => {
-        this.updateLayout(this.props);
-      }));
-
-      this.imgLoad[key] = imgLoad;
+      const callback = () => {
+        raf(() => {
+          this.updateLayout(this.props);
+        });
+      };
+      window.addResizeListener(node, callback);
+      this.imgLoad[key] = { node, callback };
     }
 
     this.updateLayout(this.props);
@@ -324,7 +323,8 @@ export class GridInline extends Component {
     }
 
     if (this.imgLoad.hasOwnProperty(key)) {
-      this.imgLoad[key].off('always');
+      const { node, callback } = this.imgLoad[key];
+      window.removeResizeListener(node, callback);
       delete this.imgLoad[key];
     }
   }
