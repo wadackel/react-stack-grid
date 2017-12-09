@@ -6,6 +6,7 @@ import GridItem from '../GridItem';
 
 
 const mockProps = {
+  component: 'span',
   rect: {
     top: 0,
     left: 0,
@@ -41,6 +42,18 @@ describe('<GridItem />', () => {
 
   afterEach(() => {
     clock.restore();
+  });
+
+
+  test('Should be change component', () => {
+    const wrapper = mount(
+      <GridItem
+        {...mockProps}
+        component="li"
+      />
+    );
+
+    expect(wrapper.find('li').length).toBe(1);
   });
 
 

@@ -10,6 +10,7 @@ import type { Units, Rect } from '../types/';
 type Props = {
   itemKey: string;
   index: number;
+  component: string,
   rect: Rect;
   containerSize: {
     width: number;
@@ -57,6 +58,7 @@ export default class GridItem extends Component {
   static propTypes = {
     itemKey: PropTypes.string,
     index: PropTypes.number,
+    component: PropTypes.string,
     rect: PropTypes.shape({
       top: PropTypes.number,
       left: PropTypes.number,
@@ -194,6 +196,7 @@ export default class GridItem extends Component {
     const {
       /* eslint-disable no-unused-vars */
       index,
+      component: Element,
       containerSize,
       appearDelay,
       appear,
@@ -227,7 +230,7 @@ export default class GridItem extends Component {
 
     /* eslint-disable no-return-assign */
     return (
-      <span
+      <Element
         {...rest}
         ref={node => this.node = node}
         style={style}

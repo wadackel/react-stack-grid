@@ -12,6 +12,7 @@ const mockProps = {
   style: {},
   refCallback: () => {},
   component: 'div',
+  itemComponent: 'span',
   columnWidth: 150,
   gutterWidth: 5,
   gutterHeight: 5,
@@ -67,13 +68,17 @@ describe('<StackGrid /> (GridInline)', () => {
       <GridInline
         {...mockProps}
         className="rsg-grid"
-        component="section"
+        component="ul"
+        itemComponent="li"
       >
         <div key="A">A</div>
+        <div key="B">B</div>
+        <div key="C">C</div>
       </GridInline>
     );
 
-    expect(wrapper.find('section.rsg-grid').length).toBe(1);
+    expect(wrapper.find('ul.rsg-grid').length).toBe(1);
+    expect(wrapper.find('li').length).toBe(3);
   });
 
 

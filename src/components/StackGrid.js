@@ -63,6 +63,7 @@ type Props = {
   style: Object;
   gridRef?: Function;
   component: string;
+  itemComponent: string;
   columnWidth: number | string;
   gutterWidth: number;
   gutterHeight: number;
@@ -111,6 +112,7 @@ const propTypes = {
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   gridRef: PropTypes.func,
   component: PropTypes.string,
+  itemComponent: PropTypes.string,
   columnWidth: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -350,6 +352,7 @@ export class GridInline extends Component {
       style,
       size,
       component,
+      itemComponent,
       children,
       ...rest
     } = this.props;
@@ -383,6 +386,7 @@ export class GridInline extends Component {
             {...rest}
             index={i}
             key={child.key}
+            component={itemComponent}
             itemKey={child.key}
             rect={rects[i]}
             rtl={rtl}
@@ -412,6 +416,7 @@ export default class StackGrid extends Component {
     style: {},
     gridRef: null,
     component: 'div',
+    itemComponent: 'span',
     columnWidth: 150,
     gutterWidth: 5,
     gutterHeight: 5,
