@@ -18,7 +18,7 @@ import type { Units } from '../types/';
 const imagesLoaded = ExecutionEnvironment.canUseDOM ? require('imagesloaded') : null;
 
 
-const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v);
+const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v); // eslint-disable-line no-restricted-globals
 const isPercentageNumber = (v: any): boolean => typeof v === 'string' && /^\d+(\.\d+)?%$/.test(v);
 
 // eslint-disable-next-line arrow-parens
@@ -381,8 +381,8 @@ export class GridInline extends Component {
         }}
         ref={this.handleRef}
       >
-        {validChildren.map((child, i) =>
-          (<GridItem
+        {validChildren.map((child, i) => (
+          <GridItem
             {...rest}
             index={i}
             key={child.key}
@@ -395,8 +395,8 @@ export class GridInline extends Component {
             onUnmount={this.handleItemUnmount}
           >
             {child}
-          </GridItem>)
-        )}
+          </GridItem>
+        ))}
       </TransitionGroup>
     );
     /* eslint-enable no-return-assign */

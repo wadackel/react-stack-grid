@@ -46,15 +46,15 @@ const RealWorld = () => (
     entered={transition.entered}
     leaved={transition.leaved}
   >
-    {images.map(obj =>
-      (<figure
+    {images.map(obj => (
+      <figure
         key={obj.src}
         className="image"
       >
         <img src={obj.src} alt={obj.label} />
         <figcaption>{obj.label}</figcaption>
-      </figure>)
-    )}
+      </figure>
+    ))}
   </StackGrid>
 );
 

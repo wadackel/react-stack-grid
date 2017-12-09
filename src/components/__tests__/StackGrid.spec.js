@@ -38,7 +38,7 @@ describe('<StackGrid /> (GridInline)', () => {
       <StackGrid />
     );
 
-    expect(wrapper.children().length).toBe(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
 
@@ -77,8 +77,8 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(wrapper.find('ul.rsg-grid').length).toBe(1);
-    expect(wrapper.find('li').length).toBe(3);
+    expect(wrapper.find('ul.rsg-grid')).toHaveLength(1);
+    expect(wrapper.find('li')).toHaveLength(3);
   });
 
 
@@ -91,7 +91,7 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(wrapper.find('div.item').length).toBe(3);
+    expect(wrapper.find('div.item')).toHaveLength(3);
   });
 
 
@@ -106,7 +106,7 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(callback.mock.calls.length).toBe(1);
+    expect(callback.mock.calls).toHaveLength(1);
     expect(callback.mock.calls[0]).toEqual([
       wrapper.instance(),
     ]);
@@ -124,14 +124,14 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(callback.mock.calls.length).toBe(1);
+    expect(callback.mock.calls).toHaveLength(1);
 
     wrapper.setProps({
       ...mockProps,
       size: { width: 300, height: 0 },
     });
 
-    expect(callback.mock.calls.length).toBe(2);
+    expect(callback.mock.calls).toHaveLength(2);
   });
 
   test('Should be horizontal', () => {

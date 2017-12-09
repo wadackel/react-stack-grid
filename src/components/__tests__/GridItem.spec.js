@@ -53,7 +53,7 @@ describe('<GridItem />', () => {
       />
     );
 
-    expect(wrapper.find('li').length).toBe(1);
+    expect(wrapper.find('li')).toHaveLength(1);
   });
 
 
