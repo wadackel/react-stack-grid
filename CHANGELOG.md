@@ -1,3 +1,9 @@
+## 0.7.0
+
+* Add `itemComponent` props. Thank you [@solomonhawk](https://github.com/solomonhawk) ! [#35](https://github.com/tsuyoshiwada/react-stack-grid/issues/35)
+
+
+
 ## 0.6.0
 
 * Add `rtl` props. Thank you [@azizghuloum](https://github.com/azizghuloum) !

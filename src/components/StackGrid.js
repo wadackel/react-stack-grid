@@ -18,7 +18,7 @@ import type { Units } from '../types/';
 const imagesLoaded = ExecutionEnvironment.canUseDOM ? require('imagesloaded') : null;
 
 
-const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v);
+const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v); // eslint-disable-line no-restricted-globals
 const isPercentageNumber = (v: any): boolean => typeof v === 'string' && /^\d+(\.\d+)?%$/.test(v);
 
 // eslint-disable-next-line arrow-parens
@@ -63,6 +63,7 @@ type Props = {
   style: Object;
   gridRef?: Function;
   component: string;
+  itemComponent: string;
   columnWidth: number | string;
   gutterWidth: number;
   gutterHeight: number;
@@ -111,6 +112,7 @@ const propTypes = {
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   gridRef: PropTypes.func,
   component: PropTypes.string,
+  itemComponent: PropTypes.string,
   columnWidth: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -350,6 +352,7 @@ export class GridInline extends Component {
       style,
       size,
       component,
+      itemComponent,
       children,
       ...rest
     } = this.props;
@@ -378,11 +381,12 @@ export class GridInline extends Component {
         }}
         ref={this.handleRef}
       >
-        {validChildren.map((child, i) =>
-          (<GridItem
+        {validChildren.map((child, i) => (
+          <GridItem
             {...rest}
             index={i}
             key={child.key}
+            component={itemComponent}
             itemKey={child.key}
             rect={rects[i]}
             rtl={rtl}
@@ -391,8 +395,8 @@ export class GridInline extends Component {
             onUnmount={this.handleItemUnmount}
           >
             {child}
-          </GridItem>)
-        )}
+          </GridItem>
+        ))}
       </TransitionGroup>
     );
     /* eslint-enable no-return-assign */
@@ -412,6 +416,7 @@ export default class StackGrid extends Component {
     style: {},
     gridRef: null,
     component: 'div',
+    itemComponent: 'span',
     columnWidth: 150,
     gutterWidth: 5,
     gutterHeight: 5,

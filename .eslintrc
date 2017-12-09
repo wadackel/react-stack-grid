@@ -34,6 +34,8 @@
         "functions": "ignore"
       }
     ],
+    "function-paren-newline": "off",
+    "object-curly-newline": "off",
     "react/no-find-dom-node": "off",
     "react/jsx-filename-extension": "off",
     "react/sort-comp": "off",

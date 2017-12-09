@@ -12,6 +12,7 @@ const mockProps = {
   style: {},
   refCallback: () => {},
   component: 'div',
+  itemComponent: 'span',
   columnWidth: 150,
   gutterWidth: 5,
   gutterHeight: 5,
@@ -37,7 +38,7 @@ describe('<StackGrid /> (GridInline)', () => {
       <StackGrid />
     );
 
-    expect(wrapper.children().length).toBe(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
 
@@ -67,13 +68,17 @@ describe('<StackGrid /> (GridInline)', () => {
       <GridInline
         {...mockProps}
         className="rsg-grid"
-        component="section"
+        component="ul"
+        itemComponent="li"
       >
         <div key="A">A</div>
+        <div key="B">B</div>
+        <div key="C">C</div>
       </GridInline>
     );
 
-    expect(wrapper.find('section.rsg-grid').length).toBe(1);
+    expect(wrapper.find('ul.rsg-grid')).toHaveLength(1);
+    expect(wrapper.find('li')).toHaveLength(3);
   });
 
 
@@ -86,7 +91,7 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(wrapper.find('div.item').length).toBe(3);
+    expect(wrapper.find('div.item')).toHaveLength(3);
   });
 
 
@@ -101,7 +106,7 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(callback.mock.calls.length).toBe(1);
+    expect(callback.mock.calls).toHaveLength(1);
     expect(callback.mock.calls[0]).toEqual([
       wrapper.instance(),
     ]);
@@ -119,14 +124,14 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(callback.mock.calls.length).toBe(1);
+    expect(callback.mock.calls).toHaveLength(1);
 
     wrapper.setProps({
       ...mockProps,
       size: { width: 300, height: 0 },
     });
 
-    expect(callback.mock.calls.length).toBe(2);
+    expect(callback.mock.calls).toHaveLength(2);
   });
 
   test('Should be horizontal', () => {
