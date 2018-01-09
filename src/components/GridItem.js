@@ -42,8 +42,8 @@ const getTransitionStyles = (type: string, props: Props): Object => {
 };
 
 const getPositionStyles = (rect: Rect, zIndex: number, rtl: boolean): Object => ({
-  translateX: `${rtl ? -rect.left : rect.left}px`,
-  translateY: `${rect.top}px`,
+  translateX: `${rtl ? -Math.round(rect.left) : Math.round(rect.left)}px`,
+  translateY: `${Math.round(rect.top)}px`,
   zIndex,
 });
 

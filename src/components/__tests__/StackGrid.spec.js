@@ -152,10 +152,10 @@ describe('<StackGrid /> (GridInline)', () => {
       </GridInline>
     );
 
-    expect(wrapper.find('span').at(0).prop('style').transform).toBe('translateX(7.5px) translateY(10px)');
-    expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(7.5px) translateY(15px)');
-    expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(162.5px) translateY(10px)');
-    expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(162.5px) translateY(15px)');
+    expect(wrapper.find('span').at(0).prop('style').transform).toBe('translateX(8px) translateY(10px)');
+    expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(8px) translateY(15px)');
+    expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(163px) translateY(10px)');
+    expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(163px) translateY(15px)');
   });
 
   test('Should be horizontal RTL', () => {
@@ -181,9 +181,9 @@ describe('<StackGrid /> (GridInline)', () => {
     expect(wrapper.find('span').at(2).prop('style').right).toBe(0);
     expect(wrapper.find('span').at(3).prop('style').right).toBe(0);
 
-    expect(wrapper.find('span').at(0).prop('style').transform).toBe('translateX(-7.5px) translateY(10px)');
-    expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(-7.5px) translateY(15px)');
-    expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(-162.5px) translateY(10px)');
-    expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(-162.5px) translateY(15px)');
+    expect(wrapper.find('span').at(0).prop('style').transform).toBe('translateX(-8px) translateY(10px)');
+    expect(wrapper.find('span').at(1).prop('style').transform).toBe('translateX(-8px) translateY(15px)');
+    expect(wrapper.find('span').at(2).prop('style').transform).toBe('translateX(-163px) translateY(10px)');
+    expect(wrapper.find('span').at(3).prop('style').transform).toBe('translateX(-163px) translateY(15px)');
   });
 });
