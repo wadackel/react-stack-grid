@@ -244,7 +244,11 @@ import StackGrid from 'react-stack-grid';
 
 class YourComponent extends Component {
   render() {
-    const { width } = this.props;
+    const { 
+      size: { 
+        width
+      } 
+    } = this.props;
 
     return (
       <StackGrid
