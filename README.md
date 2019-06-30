@@ -239,7 +239,7 @@ This is a solution, but we can respond in other ways!
 
 ```javascript
 import React, { Component } from 'react';
-import sizeMe from 'react-sizeme';
+import withSize from 'react-sizeme';
 import StackGrid from 'react-stack-grid';
 
 class YourComponent extends Component {
@@ -261,7 +261,7 @@ class YourComponent extends Component {
   }
 }
 
-export default sizeMe()(YourComponent);
+export default withSize()(YourComponent);
 ```
 
 
