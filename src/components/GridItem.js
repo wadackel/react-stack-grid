@@ -223,6 +223,7 @@ export default class GridItem extends Component {
       display: 'block',
       position: 'absolute',
       top: 0,
+      opacity: 1,
       ...(rtl ? { right: 0 } : { left: 0 }),
       width: rect.width,
       transition: transition(['opacity', 'transform'], duration, easing),
